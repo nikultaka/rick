@@ -34,11 +34,11 @@ class ContainerController extends Controller
             $data = array();
             if(!empty($containerTypeData)) {
                 $data = $containerTypeData;
-                $response = [
-                    config('api.CODE')    => config('HttpCodes.success'),
-                    config('api.RESULT')  => $data
-                ];
             }   
+            $response = [
+                config('api.CODE')    => config('HttpCodes.success'),
+                config('api.RESULT')  => $data
+            ];
             ParcelHelper::sendResponse($response, config('HttpCodes.success')); 
         } catch (Exception $e) {
             ParcelHelper::showException($e, $e->getCode());
