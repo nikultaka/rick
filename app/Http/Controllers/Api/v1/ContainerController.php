@@ -33,13 +33,13 @@ class ContainerController extends Controller
             $containerTypeData = ContainerType::orderBy('order_number')->get()->toArray();
             $data = array();
             if(!empty($containerTypeData)) {
+                $data = $containerTypeData;
                 $response = [
                     config('api.CODE')    => config('HttpCodes.success'),
-                    config('api.RESULT')  => $containerTypeData
+                    config('api.RESULT')  => $data
                 ];
-                //send response
-                ParcelHelper::sendResponse($response, config('HttpCodes.success'));
-            }    
+            }   
+            ParcelHelper::sendResponse($response, config('HttpCodes.success')); 
         } catch (Exception $e) {
             ParcelHelper::showException($e, $e->getCode());
         }  
