@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Models\ContainerType;
+use App\Models\Container;
 use Illuminate\Http\Request;
 use App\Http\Requests\CommentRequest;
 use App\Http\Controllers\Controller;
@@ -10,6 +11,7 @@ use App\Http\Resources\Comment\CommentResource;
 use App\Http\Resources\Comment\CommentCollection;
 use Symfony\Component\HttpFoundation\Response;
 use App\Helpers\ParcelHelper;
+use Illuminate\Support\Facades\Auth;
 
 class ContainerController extends Controller
 {
@@ -39,36 +41,89 @@ class ContainerController extends Controller
                 ParcelHelper::sendResponse($response, config('HttpCodes.success'));
             }    
         } catch (Exception $e) {
-            //show exception response
             ParcelHelper::showException($e, $e->getCode());
         }  
     }
     
-    /*public function store(CommentRequest $request, Post $post)
+    public function storeWegen(Request $request)
     {
-        $comment = new Comment( $request->all() );
-        $post->comments()->save( $comment );
-        return response([
-            'data' => new CommentResource($comment)
-        ], Response::HTTP_CREATED);
-    }
-    
-    public function show(Post $post, Comment $comment)
-    {
-        return new CommentResource($post->comments()->find($comment->id));
+        try {
+             ParcelHelper::validateRequest($request->all(), self::weganValidationRules($request->all()));     
+             $container = [];
+             $user = Auth::user();
+             $username = $user->name;
+             if($request->is_save == '1') {
+                $container = new Container();
+                $container->user_id = $user->id;
+                $container->container_number = $request->container_number;
+                $container->container_type = $request->container_type;
+                $container->weight = $request->container_number;
+                $prefix = '';
+                for($i = 0; $i < 6; $i++){
+                    $prefix .= random_int(0,1) ? chr(random_int(65, 90)) : random_int(0, 9);
+                }
+                $container->pin = $prefix;
+                $container->save();
+            }
+            $data = array('container_number'=>$request->container_number,"container_type"=>$request->container_type,'weight'=>$request->container_number,'name'=>$username);
+            \Mail::send('container_mail', $data, function($message) {
+                $user = Auth::user();
+                $username = $user->name;
+                $usermail = $user->email;
+                $message->to($usermail, $username)->subject
+                ('Container Info');
+                $message->from(env("MAIL_USERNAME"),'Rick');
+            });
+            $response = [
+                config('api.CODE')    => config('HttpCodes.success'),
+                config('api.RESULT')  => $container
+            ];
+            ParcelHelper::sendResponse($response, config('HttpCodes.success'));
+        } catch (Exception $e) {   
+            echo $e->getMessage(); die;
+            ParcelHelper::showException($e, $e->getCode());
+        }
     }
 
-    public function update(Request $request, Post $post, Comment $comment)
+
+    private static function weganValidationRules(): array
     {
-        $comment->update( $request->all() );
-        return response([
-            'data' => new CommentResource($comment)
-        ], Response::HTTP_CREATED);
+        return [
+            'container_number'   => 'required',
+            'container_type'     => 'required',
+            'weight'             => 'required',
+            'is_save'            => 'required',   
+        ];
     }
 
-    public function destroy(Post $post, Comment $comment)
+    private static function containerSearchValidationRules(): array
     {
-        $comment->delete();
-        return response(null, Response::HTTP_NO_CONTENT);
-    }*/
+        return [
+            'container_number'   => 'required_if:pin,==,""',
+            'pin' => 'required_if:container_number,==,""'
+        ];
+    }
+
+    public function containerDetail(Request $request)
+    {
+        try {
+             ParcelHelper::validateRequest($request->all(), self::containerSearchValidationRules($request->all()));     
+            $containerData = [];
+            if(isset($request->container_number)) {
+                $container_number = $request->container_number;    
+                $containerData = Container::where('container_number',$container_number)->get();
+            } else {
+                $pin = $request->pin;   
+                $containerData = Container::where('pin',$pin)->get();
+            }
+            $response = [
+                config('api.CODE')    => config('HttpCodes.success'),
+                config('api.RESULT')  => $containerData
+            ];
+            ParcelHelper::sendResponse($response, config('HttpCodes.success'));
+        } catch (Exception $e) {   
+            echo $e->getMessage(); die;
+            ParcelHelper::showException($e, $e->getCode());
+        }
+    }
 }
