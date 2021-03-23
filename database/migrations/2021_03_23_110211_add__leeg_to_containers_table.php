@@ -14,7 +14,7 @@ class AddLeegToContainersTable extends Migration
     public function up()
     {
         Schema::table('containers', function (Blueprint $table) {
-            $table->string('Leeg')->nullable();
+            $table->string('leeg')->nullable();
         });
     }
 

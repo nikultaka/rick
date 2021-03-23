@@ -5,4 +5,4 @@
 <span>Weight : {{$weight}}</span><br>
 <span>Stack : {{$stack}}</span><br>
 <span>Locatie : {{$locatie}}</span><br>
-<span>Leeg : {{$Leeg}}</span>
+<span>Leeg : {{$leeg}}</span>

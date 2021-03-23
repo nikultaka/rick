@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddRolesToUsersTable extends Migration
+class AddReferenceToContainersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class AddRolesToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->text('roles')->nullable();
+        Schema::table('containers', function (Blueprint $table) {
+            $table->string('reference')->nullable();
         });
-    }
+    }    
 
     /**
      * Reverse the migrations.
@@ -25,7 +25,7 @@ class AddRolesToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('containers', function (Blueprint $table) {
             //
         });
     }
