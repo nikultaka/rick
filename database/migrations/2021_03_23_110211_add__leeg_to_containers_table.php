@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddLeegVolToContainersTable extends Migration
+class AddLeegToContainersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,7 @@ class AddLeegVolToContainersTable extends Migration
     public function up()
     {
         Schema::table('containers', function (Blueprint $table) {
-            $table->string('Leeg/vol')->nullable();
-            $table->dropColumn('Leeg/vol');
+            $table->string('Leeg')->nullable();
         });
     }
 

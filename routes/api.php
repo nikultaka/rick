@@ -8,10 +8,10 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api\v1','middleware' => ['auth:a
     Route::get('container-detail', 'ContainerController@containerDetail');
     Route::get('container-type', 'ContainerController@getContainerType');
     Route::get('client-list', 'ClientlistController@getClientList');
+    Route::post('store-container', 'ContainerController@storeContainer');
 });
 
 Route::group(['prefix' => 'v1', 'namespace' => 'Api\v1'], function () {
     Route::post('login', 'AuthenticatesController@login');
-    Route::get('allcontainer-list', 'ContainerController@getAllContainerDetail');
 
 });  
