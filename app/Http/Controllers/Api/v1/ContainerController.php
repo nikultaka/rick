@@ -102,7 +102,6 @@ class ContainerController extends Controller
             'container_number'   => 'required',
             'container_type'     => 'required',
             'weight'             => 'required',
-            'is_save'            => 'required',   
         ];
     }
 
@@ -143,7 +142,6 @@ class ContainerController extends Controller
              $container = [];
              $user = Auth::user();
              $username = $user->name;
-             if($request->is_save == '1') {
                 $container = new Container();
                 $container->user_id = $user->id;
                 $container->container_number = $request->container_number;
@@ -159,7 +157,6 @@ class ContainerController extends Controller
                 }
                 $container->pin = $prefix;
                 $container->save();
-            }
             $data = array("container_number"=>$request->container_number,
                             "container_type"=>$request->container_type,
                             "weight"=>$request->container_number,
