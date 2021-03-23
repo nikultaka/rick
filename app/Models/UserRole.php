@@ -13,6 +13,8 @@ class UserRole {
     const ROLE_FINANCE = 'ROLE_FINANCE';
     const ROLE_ACCOUNT_MANAGER = 'ROLE_ACCOUNT_MANAGER';
     const ROLE_SUPPORT = 'ROLE_SUPPORT';
+    const ROLE_CUSTOMER = 'ROLE_CUSTOMER';
+    const ROLE_CLIENT = 'ROLE_CLIENT';
 
     /**
      * @var array
@@ -45,9 +47,6 @@ class UserRole {
 
         return [];
     }
-    /***
-     * @return array
-     */
     public static function getRoleList()
     {
         return [
@@ -56,6 +55,8 @@ class UserRole {
             static::ROLE_ACCOUNT_MANAGER => 'Account Manager',
             static::ROLE_FINANCE => 'Finance',
             static::ROLE_SUPPORT => 'Support',
+            static::ROLE_CUSTOMER => 'Customer',
+            static::ROLE_CLIENT => 'Client',
         ];
     }
 

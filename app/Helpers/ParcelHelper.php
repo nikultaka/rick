@@ -55,7 +55,6 @@ class ParcelHelper
         $validator = Validator::make($post, $rules, self::validationMessage());
         //Check input parameter validation
         if ($validator->fails()) {
-            //Sending Validation Error Message
             self::showValidationError($validator);
         }
     }
