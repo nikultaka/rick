@@ -126,4 +126,22 @@ class ContainerController extends Controller
             ParcelHelper::showException($e, $e->getCode());
         }
     }
+
+    public function getAllContainerDetail(Container $Containerlist){
+        try {
+            $containerDetailData = Container::all()->toArray();
+            $data = [];
+            if(!empty($containerDetailData)){
+                $data = $containerDetailData;     
+            }   
+            $response = [
+                config('api.CODE')    => config('HttpCodes.success'),
+                config('api.RESULT')  => $data
+            ];
+            ParcelHelper::sendResponse($response, config('HttpCodes.success')); 
+        } catch (Exception $e) {
+            //show exception response
+            ParcelHelper::showException($e, $e->getCode());
+        }  
+    }
 }

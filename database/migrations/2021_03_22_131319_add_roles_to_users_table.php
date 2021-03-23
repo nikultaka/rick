@@ -15,7 +15,7 @@ class AddRolesToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->text('roles')->nullable();
-        }); 
+        });
     }
 
     /**
@@ -25,6 +25,8 @@ class AddRolesToUsersTable extends Migration
      */
     public function down()
     {
-            Schema::dropIfExists('roles');
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 }

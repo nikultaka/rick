@@ -9,5 +9,5 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Container extends Authenticatable
 {
-    
+	protected $table = 'containers';
 }
