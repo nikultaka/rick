@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\v1;
 
-use App\Models\UserloginList;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\CommentRequest;
 use App\Http\Controllers\Controller;
@@ -24,50 +24,24 @@ class ClientlistController extends Controller
     {
         return new CommentCollection($post->comments);
     }*/
-    public function getclientlist(UserloginList $UserloginList)
+    public function getClientList(User $userList)
     {
         try {
-            $UserloginListData = UserloginList::all('id','name','email','created_at','updated_at','roles')->toArray();
-            if(!empty($UserloginListData)){
-                $response = [
-                    config('api.CODE')    => config('HttpCodes.success'),
-                    config('api.RESULT')  => $UserloginListData
-                ];
-                //send response
-                ParcelHelper::sendResponse($response, config('HttpCodes.success'));
-            }    
+            $userListData = User::all('id','name','email','created_at','updated_at','roles')->toArray();
+            $data = [];
+            if(!empty($userListData)) {
+                $data = $userListData;     
+            }   
+            $response = [
+                config('api.CODE')    => config('HttpCodes.success'),
+                config('api.RESULT')  => $data
+            ];
+            ParcelHelper::sendResponse($response, config('HttpCodes.success')); 
         } catch (Exception $e) {
             //show exception response
             ParcelHelper::showException($e, $e->getCode());
         }  
     }
-    /*public function store(CommentRequest $request, Post $post)
-    {
-        $comment = new Comment( $request->all() );
-        $post->comments()->save( $comment );
-        return response([
-            'data' => new CommentResource($comment)
-        ], Response::HTTP_CREATED);
-    }
-    
-    public function show(Post $post, Comment $comment)
-    {
-        return new CommentResource($post->comments()->find($comment->id));
-    }
-
-    public function update(Request $request, Post $post, Comment $comment)
-    {
-        $comment->update( $request->all() );
-        return response([
-            'data' => new CommentResource($comment)
-        ], Response::HTTP_CREATED);
-    }
-
-    public function destroy(Post $post, Comment $comment)
-    {
-        $comment->delete();
-        return response(null, Response::HTTP_NO_CONTENT);
-    }*/
     
 }
 

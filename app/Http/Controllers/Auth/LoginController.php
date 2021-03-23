@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Helpers\ParcelHelper;
 
 class LoginController extends Controller
 {
@@ -34,6 +35,12 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        //$this->middleware('guest')->except('logout');
+        $response = [
+            config('api.CODE')    => config('HttpCodes.accessDenied'),
+            config('api.MESSAGE') => config('Messages.invalidCredentials'),
+            config('api.RESULT')  => []
+        ];
+        ParcelHelper::sendResponse($response,config('HttpCodes.success'));
     }
 }
