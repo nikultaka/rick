@@ -16,6 +16,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //
     }
+    
 
     /**
      * Bootstrap any application services.
@@ -26,4 +27,10 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
     }
+    // $this->app->singleton(CheckUserRole::class, function(Application $app) {
+    //     return new CheckUserRole(
+    //         $app->make(RoleChecker::class)
+    //     );
+    // });
+    
 }
