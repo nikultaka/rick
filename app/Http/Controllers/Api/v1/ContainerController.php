@@ -58,6 +58,7 @@ class ContainerController extends Controller
                 $container->container_number = $request->container_number;
                 $container->container_type = $request->container_type;
                 $container->weight = $request->container_number;
+                $container->reference = $request->reference;
                 $prefix = '';
                 for($i = 0; $i < 6; $i++){
                     $prefix .= random_int(0,1) ? chr(random_int(65, 90)) : random_int(0, 9);
@@ -93,6 +94,7 @@ class ContainerController extends Controller
             'container_type'     => 'required',
             'weight'             => 'required',
             'is_save'            => 'required',   
+            'reference'          => 'required',
         ];
     }
 
@@ -102,7 +104,10 @@ class ContainerController extends Controller
             'container_number'   => 'required',
             'container_type'     => 'required',
             'weight'             => 'required',
-            'is_save'            => 'required',   
+            'stack'              => 'required',
+            'locatie'            => 'required',
+            'leeg'               => 'required',
+            'reference'          => 'required',
         ];
     }
 
@@ -138,35 +143,35 @@ class ContainerController extends Controller
     }
 
     public function storeContainer(Request $request){
-        try {
+        try{
              ParcelHelper::validateRequest($request->all(), self::containerStoreValidationRules($request->all()));
              $container = [];
              $user = Auth::user();
              $username = $user->name;
-             if($request->is_save == '1') {
-                $container = new Container();
-                $container->user_id = $user->id;
-                $container->container_number = $request->container_number;
-                $container->container_type = $request->container_type;
-                $container->weight = $request->weight;
-                $container->stack = $request->stack;
-                $container->locatie = $request->locatie;
-                $container->Leeg = $request->Leeg;
 
-                $prefix = '';
-                for($i = 0; $i < 6; $i++){
-                    $prefix .= random_int(0,1) ? chr(random_int(65, 90)) : random_int(0, 9);
-                }
-                $container->pin = $prefix;
-                $container->save();
+            $container = new Container();
+            $container->user_id = $user->id;
+            $container->container_number = $request->container_number;
+            $container->container_type = $request->container_type;
+            $container->weight = $request->weight;
+            $container->stack = $request->stack;
+            $container->locatie = $request->locatie;
+            $container->leeg = $request->leeg;
+            $container->reference = $request->reference;
+
+            $prefix = '';
+            for($i = 0; $i < 6; $i++){
+                $prefix .= random_int(0,1) ? chr(random_int(65, 90)) : random_int(0, 9);
             }
+            $container->pin = $prefix;
+            $container->save();
             $data = array("container_number"=>$request->container_number,
                             "container_type"=>$request->container_type,
                             "weight"=>$request->container_number,
                             "name"=>$username,
                             "stack"=>$request->stack,
                             'locatie'=>$request->locatie,
-                            "Leeg"=>$request->Leeg);
+                            "leeg"=>$request->leeg);
          
             \Mail::send('container_detail', $data, function($message) {
                 $user = Auth::user();

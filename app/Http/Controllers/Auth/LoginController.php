@@ -42,5 +42,6 @@ class LoginController extends Controller
             config('api.RESULT')  => []
         ];
         ParcelHelper::sendResponse($response,config('HttpCodes.success'));
+        exit;
     }
 }
