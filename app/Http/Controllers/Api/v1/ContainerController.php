@@ -104,13 +104,10 @@ class ContainerController extends Controller
             'container_number'   => 'required',
             'container_type'     => 'required',
             'weight'             => 'required',
-<<<<<<< HEAD
-=======
             'stack'              => 'required',
             'locatie'            => 'required',
             'leeg'               => 'required',
             'reference'          => 'required',
->>>>>>> 04c2c85aafb93bdb05360daa5759f683e5e667e1
         ];
     }
 
@@ -151,23 +148,6 @@ class ContainerController extends Controller
              $container = [];
              $user = Auth::user();
              $username = $user->name;
-<<<<<<< HEAD
-                $container = new Container();
-                $container->user_id = $user->id;
-                $container->container_number = $request->container_number;
-                $container->container_type = $request->container_type;
-                $container->weight = $request->weight;
-                $container->stack = $request->stack;
-                $container->locatie = $request->locatie;
-                $container->Leeg = $request->Leeg;
-
-                $prefix = '';
-                for($i = 0; $i < 6; $i++){
-                    $prefix .= random_int(0,1) ? chr(random_int(65, 90)) : random_int(0, 9);
-                }
-                $container->pin = $prefix;
-                $container->save();
-=======
 
             $container = new Container();
             $container->user_id = $user->id;
@@ -185,10 +165,9 @@ class ContainerController extends Controller
             }
             $container->pin = $prefix;
             $container->save();
->>>>>>> 04c2c85aafb93bdb05360daa5759f683e5e667e1
             $data = array("container_number"=>$request->container_number,
                             "container_type"=>$request->container_type,
-                            "weight"=>$request->container_number,
+                            "weight"=>$request->weight,
                             "name"=>$username,
                             "stack"=>$request->stack,
                             'locatie'=>$request->locatie,
