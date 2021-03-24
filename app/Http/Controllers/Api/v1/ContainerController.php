@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\v1;
 
 use App\Models\ContainerType;
 use App\Models\Container;
+use App\Models\License;
 use Illuminate\Http\Request;
 use App\Http\Requests\CommentRequest;
 use App\Http\Controllers\Controller;
@@ -59,6 +60,9 @@ class ContainerController extends Controller
                 $container->container_type = $request->container_type;
                 $container->weight = $request->container_number;
                 $container->reference = $request->reference;
+                $container->license_plate = $request->license_plate;
+                $container->transporter_id = $request->transporter_id;
+                $container->client_id = $request->client_id;
                 $prefix = '';
                 for($i = 0; $i < 6; $i++){
                     $prefix .= random_int(0,1) ? chr(random_int(65, 90)) : random_int(0, 9);
@@ -95,6 +99,9 @@ class ContainerController extends Controller
             'weight'             => 'required',
             'is_save'            => 'required',   
             'reference'          => 'required',
+            'license_plate'      => 'required',   
+            'transporter_id'     => 'required_without:client_id',
+            'client_id'          => 'required_without:transporter_id',
         ];
     }
 
@@ -104,13 +111,13 @@ class ContainerController extends Controller
             'container_number'   => 'required',
             'container_type'     => 'required',
             'weight'             => 'required',
-<<<<<<< HEAD
-=======
             'stack'              => 'required',
             'locatie'            => 'required',
             'leeg'               => 'required',
             'reference'          => 'required',
->>>>>>> 04c2c85aafb93bdb05360daa5759f683e5e667e1
+            'license_plate'      => 'required',   
+            'transporter_id'     => 'required_without:client_id',
+            'client_id'          => 'required_without:transporter_id',
         ];
     }
 
@@ -150,24 +157,7 @@ class ContainerController extends Controller
              ParcelHelper::validateRequest($request->all(), self::containerStoreValidationRules($request->all()));
              $container = [];
              $user = Auth::user();
-             $username = $user->name;
-<<<<<<< HEAD
-                $container = new Container();
-                $container->user_id = $user->id;
-                $container->container_number = $request->container_number;
-                $container->container_type = $request->container_type;
-                $container->weight = $request->weight;
-                $container->stack = $request->stack;
-                $container->locatie = $request->locatie;
-                $container->Leeg = $request->Leeg;
-
-                $prefix = '';
-                for($i = 0; $i < 6; $i++){
-                    $prefix .= random_int(0,1) ? chr(random_int(65, 90)) : random_int(0, 9);
-                }
-                $container->pin = $prefix;
-                $container->save();
-=======
+             $username = $user->name;    
 
             $container = new Container();
             $container->user_id = $user->id;
@@ -178,6 +168,25 @@ class ContainerController extends Controller
             $container->locatie = $request->locatie;
             $container->leeg = $request->leeg;
             $container->reference = $request->reference;
+            $container->license_plate = $request->license_plate;
+            $container->transporter_id = $request->transporter_id;
+            $container->client_id = $request->client_id;
+
+            if(isset($request->temprature)) {
+                $container->temprature = $request->temprature;    
+            }
+            if(isset($request->adr)) {
+                $container->adr = $request->adr;    
+            }
+            if(isset($request->genset)) {
+                $container->genset = $request->genset;    
+            }
+            if(isset($request->comment)) {
+                $container->comment = $request->comment;    
+            }
+            if(isset($request->doorge)) {
+                $container->doorge = $request->doorge;    
+            }
 
             $prefix = '';
             for($i = 0; $i < 6; $i++){
@@ -185,7 +194,6 @@ class ContainerController extends Controller
             }
             $container->pin = $prefix;
             $container->save();
->>>>>>> 04c2c85aafb93bdb05360daa5759f683e5e667e1
             $data = array("container_number"=>$request->container_number,
                             "container_type"=>$request->container_type,
                             "weight"=>$request->container_number,
@@ -211,5 +219,22 @@ class ContainerController extends Controller
             echo $e->getMessage(); die;
             ParcelHelper::showException($e, $e->getCode());
         }
+    }
+
+    public function getLicence(Request $request) {
+        try {
+            $licenseData = License::get()->toArray();
+            $data = array();
+            if(!empty($licenseData)) {
+                $data = $licenseData;
+            }   
+            $response = [
+                config('api.CODE')    => config('HttpCodes.success'),
+                config('api.RESULT')  => $data
+            ];
+            ParcelHelper::sendResponse($response, config('HttpCodes.success')); 
+        } catch (Exception $e) {
+            ParcelHelper::showException($e, $e->getCode());
+        }  
     }
 }
