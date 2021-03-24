@@ -35,13 +35,18 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('guest')->except('logout');
-        $response = [
-            config('api.CODE')    => config('HttpCodes.accessDenied'),
-            config('api.MESSAGE') => config('Messages.invalidCredentials'),
-            config('api.RESULT')  => []
-        ];
-        ParcelHelper::sendResponse($response,config('HttpCodes.success'));
-        exit;
+        $currentURL = url()->current();
+        if (strpos($currentURL, 'api') !== false) { 
+            $response = [
+                config('api.CODE')    => config('HttpCodes.accessDenied'),
+                config('api.MESSAGE') => config('Messages.invalidCredentials'),
+                config('api.RESULT')  => []
+            ];
+            ParcelHelper::sendResponse($response,config('HttpCodes.success'));
+            exit;
+        } else {
+            $this->middleware('guest')->except('logout');    
+        }
+        
     }
 }
