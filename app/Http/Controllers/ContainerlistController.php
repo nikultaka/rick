@@ -17,8 +17,8 @@ use DB;
 
 class ContainerlistController extends Controller
 {
-    public function index(){
-    	return view('container\container_list');
+    public function index() {
+    	return view('container/container_list');
     }
 
     public function getListContainer(Request $request){

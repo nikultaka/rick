@@ -53,7 +53,7 @@ class ContainerController extends Controller
              $container = [];
              $user = Auth::user();
              $username = $user->name;
-             if($request->is_save == '1') {
+             //if($request->is_save == '1') {
                 $container = new Container();
                 $container->user_id = $user->id;
                 $container->container_number = $request->container_number;
@@ -69,7 +69,7 @@ class ContainerController extends Controller
                 }
                 $container->pin = $prefix;
                 $container->save();
-            }
+            //}
             $data = array('container_number'=>$request->container_number,"container_type"=>$request->container_type,'weight'=>$request->container_number,'name'=>$username);
             \Mail::send('container_mail', $data, function($message) {
                 $user = Auth::user();
@@ -223,10 +223,15 @@ class ContainerController extends Controller
 
     public function getLicence(Request $request) {
         try {
-            $licenseData = License::get()->toArray();
+            $user = Auth::user();
+            $userID = $user->id;
+            $licenseData = Container::where('user_id',$userID)->orderBy('id', 'DESC')->get()->toArray();
+
             $data = array();
             if(!empty($licenseData)) {
-                $data = $licenseData;
+                $data['license_plate'] = $licenseData[0]['license_plate'];
+                $data['transporter_id'] = $licenseData[0]['transporter_id'];
+                $data['client_id'] = $licenseData[0]['client_id']; 
             }   
             $response = [
                 config('api.CODE')    => config('HttpCodes.success'),
