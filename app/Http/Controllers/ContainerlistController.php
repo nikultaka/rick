@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Helpers\ParcelHelper;
 use Illuminate\Support\Facades\Auth;
 use DB;
+use PDF;
 
 class ContainerlistController extends Controller
 {
@@ -21,19 +22,25 @@ class ContainerlistController extends Controller
     	return view('container/container_list');
     }
 
+
+	public function weighTicketsview(){
+    	return view('container/weigh_tickets');
+	}
+
     public function getListContainer(Request $request){
         $data = array();
         $containerData = $request->all();
         $getDatasql = DB::table('containers');
-		$getDatasql->select('containers.*', 'container_type.container_type as container_type')
+		$getDatasql->where('stack','!=','')
+				   ->select('containers.*', 'container_type.container_type as container_type')
 				   ->leftjoin("container_type", "container_type.id", "=", "containers.container_type");
 
         if(isset($containerData['search']['value']) && $containerData['search']['value'] != ''){
+			$getDatasql->where('stack','!=','');
             $search = $containerData['search']['value'];
             $getDatasql->where('containers.container_type','like','%'.$search.'%')
                        ->orWhere('containers.id','like','%'.$search.'%')
 			           ->orWhere('containers.container_number','like','%'.$search.'%')
-			           ->orWhere('containers.weight','like','%'.$search.'%')
 			           ->orWhere('containers.pin','like','%'.$search.'%')
 			           ->orWhere('containers.license_plate','like','%'.$search.'%')
 			           ->orWhere('containers.reference','like','%'.$search.'%')
@@ -61,7 +68,7 @@ class ContainerlistController extends Controller
                     $getDatasql->orderBy($order_by, "DESC");
                 }
 		}else{
-			$getDatasql->orderBy('bord.id', "DESC");
+			$getDatasql->orderBy('containers.id', "DESC");
 		}
 
         $count=$getDatasql->count();
@@ -76,7 +83,7 @@ class ContainerlistController extends Controller
 		}
         $listall=$getDatasql->get();
         foreach ($listall as $key => $row) {
-			$temp['ticker_number'] = $row->id;
+			$temp['ticker_number'] = $key+1;
 			$temp['reference'] = $row->reference;
 			$temp['date_time'] = $row->created_at != '' ? date('d-m-Y h:i', strtotime($row->created_at)) : '';
 			$temp['Pincode'] = $row->pin;
@@ -105,4 +112,89 @@ class ContainerlistController extends Controller
 		echo json_encode($json_data);
 		exit(0);
     }
+
+	public function getListWeighTickets(Request $request){
+		$weighTicketData = $request->all();
+		$data = array();
+		$weighTicketSql = DB::table('containers')
+						->where('stack','')
+						->select('containers.*', 'container_type.container_type as container_type')
+					    ->leftjoin("container_type", "container_type.id", "=", "containers.container_type");
+
+		if(isset($weighTicketData['search']['value']) && $weighTicketData['search']['value'] != '')
+		{
+			$search = $weighTicketData['search']['value'];
+			$weighTicketSql->where('stack','')
+    					   ->where('containers.id','like','%'.$search.'%')
+						   ->orWhere('containers.reference','like','%'.$search.'%')
+						   ->orWhere('containers.created_at','like','%'.$search.'%')
+						   ->orWhere('containers.container_type','like','%'.$search.'%')
+				           ->orWhere('containers.container_number','like','%'.$search.'%')
+				           ->orWhere('containers.weight','like','%'.$search.'%')
+				           ->orWhere('containers.license_plate','like','%'.$search.'%');
+		}	
+		$columns = array(
+			0 => 'containers.id',
+			1 => 'containers.reference',
+			2 => 'containers.created_at',
+			3 => 'containers.weight',
+			4 => 'containers.license_plate',
+			5 => 'containers.container_number',
+			6 => 'containers.container_type',
+		);	
+		if(isset($weighTicketData['order'][0]['column']) && $weighTicketData['order'][0]['column'] != '') {
+            $order_by = '';
+                if (isset($weighTicketData['order'][0]['dir']) && $weighTicketData['order'][0]['dir'] != '') {
+                    $order_by = $columns[$weighTicketData['order'][0]['column']];
+                    $weighTicketSql->orderBy($order_by, $weighTicketData['order'][0]['dir']);
+                }else{
+                    $weighTicketSql->orderBy($order_by, "DESC");
+                }
+		}else{
+			$weighTicketSql->orderBy('containers.id', "DESC");
+		}
+		$count=$weighTicketSql->count();
+		$totalData = 0;
+		$totalFiltered = 0;
+		if ($count > 0){
+			$totalData =$count;
+			$totalFiltered =$count;
+		}
+		if (isset($weighTicketData['start']) && $weighTicketData['start'] != '' && isset($weighTicketData['length']) && $weighTicketData['length'] != '') {
+			$weighTicketSql->limit($weighTicketData['length'])->offset($weighTicketData['start']);
+		}
+
+		$listall=$weighTicketSql->get();
+        foreach ($listall as $key => $row) {
+			$temp['ticker_number'] = $key+1;
+			$temp['reference'] = $row->reference;
+			$temp['date_time'] = $row->created_at != '' ? date('d-m-Y h:i', strtotime($row->created_at)) : '';
+			$temp['weight'] = $row->weight;
+			$temp['lisence_plate'] = $row->license_plate;
+			$temp['container_number'] = $row->container_number;
+			$temp['container_type'] = $row->container_type;
+			$getPDFurl = url('/getPdf' , $row->id);
+			$temp['weighing_slip'] = '<div class="sub-menu"><a href="'.$getPDFurl.'" class="link"><i class="fa fa-file-text" style="font-size:25px;"><span class="badge badge-pill menu-title">Download</span></i></a>';
+			$data[] = $temp;
+		}
+        $json_data = array(
+			"draw" => intval($weighTicketData['draw']),
+			"recordsTotal" => intval($totalData),
+			"recordsFiltered" => intval($totalFiltered),
+			"data" => $data,
+		);
+		echo json_encode($json_data);
+		exit(0);
+	}
+
+	public function getPDF($id){
+		$WeighTicketsDetails = DB::table('containers')
+						->select('containers.*', 'container_type.container_type as container_type')
+						->leftjoin("container_type", "container_type.id", "=", "containers.container_type")
+						->where('containers.id',$id)
+						->first();
+		$pdf = PDF::loadView('container/DownloadPDF',['WeighTicketsDetails' => $WeighTicketsDetails]);
+		return $pdf->download('WeighTicketsDetails.pdf');	
+		return view('DownloadPDF');
+	}
 }
