@@ -94,7 +94,7 @@ class ContainerController extends Controller
     private static function weganValidationRules(): array
     {
         return [
-            'container_number'   => 'required',
+            'container_number'   => 'required|unique:containers',
             'container_type'     => 'required',
             'weight'             => 'required',
             'is_save'            => 'required',   
@@ -108,7 +108,7 @@ class ContainerController extends Controller
     private static function containerStoreValidationRules(): array
     {
         return [
-            'container_number'   => 'required',
+            'container_number'   => 'required|unique:containers',
             'container_type'     => 'required',
             'weight'             => 'required',
             'stack'              => 'required',
@@ -129,6 +129,17 @@ class ContainerController extends Controller
         ];
     }
 
+    private static function containerHandlingValidationRules(): array
+    {
+        return [
+            //'container_number'   => 'required_if:container_type,==,""',
+            //'container_type' => 'required_if:container_number,==,""',
+            //'reference'   => 'required_if:container_number,==,""',
+            'container_number'   => 'required_if:reference,==,""',
+            'reference'   => 'required_if:container_number,==,""',
+        ];   
+    }
+
     public function containerDetail(Request $request)
     {
         try {
@@ -136,10 +147,10 @@ class ContainerController extends Controller
             $containerData = [];
             if(isset($request->container_number)) {
                 $container_number = $request->container_number;    
-                $containerData = Container::where('container_number',$container_number)->get();
+                $containerData = Container::where('container_number',$container_number)->with('containerTypeData','usersData')->get()->toArray();
             } else {
                 $pin = $request->pin;   
-                $containerData = Container::where('pin',$pin)->get();
+                $containerData = Container::where('pin',$pin)->with('containerTypeData','usersData')->get()->toArray();
             }
             $response = [
                 config('api.CODE')    => config('HttpCodes.success'),
@@ -155,6 +166,7 @@ class ContainerController extends Controller
     public function storeContainer(Request $request){
         try{
              ParcelHelper::validateRequest($request->all(), self::containerStoreValidationRules($request->all()));
+
              $container = [];
              $user = Auth::user();
              $username = $user->name;    
@@ -238,6 +250,45 @@ class ContainerController extends Controller
                 config('api.RESULT')  => $data
             ];
             ParcelHelper::sendResponse($response, config('HttpCodes.success')); 
+        } catch (Exception $e) {
+            ParcelHelper::showException($e, $e->getCode());
+        }  
+    }
+
+    public function containerHandling(Request $request) {
+        try {
+            ParcelHelper::validateRequest($request->all(), self::containerHandlingValidationRules($request->all()));
+
+            $handlingStatus = 1;
+            if(isset($request->is_checked) && $request->is_checked!='') {
+                $handlingStatus = 2;
+            }
+            if(isset($request->container_number) && $request->container_number!='') {
+                $container_number = $request->container_number;    
+                $containerData = Container::where('container_number',$container_number)->orderBy('id', 'DESC')->get()->toArray();    
+            } else if(isset($request->reference) && $request->reference!='') {
+                $reference = $request->reference;    
+                $containerData = Container::where('reference',$reference)->orderBy('id', 'DESC')->get()->toArray();      
+            }
+            if(!empty($containerData)) {
+                $id = $containerData[0]['id'];    
+                $containerData[0]['handling_status'] = $handlingStatus;
+                Container::where('id', $id)->update(array('handling_status' => $handlingStatus));
+                $response = [    
+                    config('api.CODE')    => config('HttpCodes.success'),
+                    config('api.RESULT')  => $containerData
+                ];
+                ParcelHelper::sendResponse($response, config('HttpCodes.success')); 
+            } else {
+                $response = [
+                    config('api.CODE')    => config('HttpCodes.accessDenied'),
+                    config('api.MESSAGE') => config('Messages.invalidContainer'),
+                    config('api.RESULT')  => []
+                ];
+                ParcelHelper::sendResponse($response,config('HttpCodes.success'));
+                exit;
+            }
+            
         } catch (Exception $e) {
             ParcelHelper::showException($e, $e->getCode());
         }  

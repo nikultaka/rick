@@ -6,6 +6,7 @@ use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\Container;
 
 class User extends Authenticatable
 {
@@ -101,5 +102,10 @@ class User extends Authenticatable
         }
 
         return $roles;
+    }
+
+    public function containers()
+    {
+        return $this->belongsTo(Container::class, 'user_id', 'id');
     }
 }

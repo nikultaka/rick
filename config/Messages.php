@@ -40,6 +40,7 @@ return [
     'noSession'                     => 'No user session exists.',
     'tokenRequired'                 => 'JWT is required',
     'invalidCredentials'            => 'Invalid credentials',
+    'invalidContainer'              => 'Container information is not valid',
     'invalidRefreshToken'           => 'Invalid refresh token',
     'HeaderMissing'                 => 'Header is missed out please check',
     'notFound'                      => 'Record Not Found',

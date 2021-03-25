@@ -42,7 +42,14 @@ class AuthenticatesController extends Controller
             } 
 
             if (!Auth::attempt($credentials)) {
-                throw new Exception(config('Messages.invalidCredentials'), config('HttpCodes.accessDenied')); //send response
+                /*throw new Exception(config('Messages.invalidCredentials'), config('HttpCodes.accessDenied')); //send response*/
+                $response = [
+                    config('api.CODE')    => config('HttpCodes.accessDenied'),
+                    config('api.MESSAGE') => config('Messages.invalidCredentials'),
+                    config('api.RESULT')  => []
+                ];
+                ParcelHelper::sendResponse($response,config('HttpCodes.success'));
+                exit;
             }
 
             //check if user is active or not
