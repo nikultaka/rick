@@ -16,14 +16,12 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
-
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
-Route::group(['middleware' => ['auth']], function () {
-    Route::get('/container-list', 'ContainerlistController@index');
-    Route::post('/getListContainer', 'ContainerlistController@getListContainer')->name('getListContainer');
-    
-});
+
+
+    Route::group(['middleware' => ['auth']], function () {
+        Route::get('/container-list', 'ContainerlistController@index');
+        Route::post('/getListContainer', 'ContainerlistController@getListContainer');
+    });

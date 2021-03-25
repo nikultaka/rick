@@ -11,7 +11,6 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api\v1','middleware' => ['auth:a
     Route::post('store-afzettern', 'ContainerController@storeContainer');
     Route::get('get-license', 'ContainerController@getLicence');
 });
-
 Route::group(['prefix' => 'v1', 'namespace' => 'Api\v1'], function () {
     Route::post('login', 'AuthenticatesController@login');
 

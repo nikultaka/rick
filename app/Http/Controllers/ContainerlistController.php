@@ -25,7 +25,6 @@ class ContainerlistController extends Controller
         // $containerData  = Container::all()->toArray();
         $data = array();
         $containerData = $request->all();
-        
         $getDatasql = DB::table('containers');
       
         if(isset($containerData['search']['value']) && $containerData['search']['value'] != '')
@@ -52,7 +51,7 @@ class ContainerlistController extends Controller
 			8 => 'containers.id',
 			9 => 'containers.id'
 		);
-        if (isset($containerData['order'][0]['column']) && $containerData['order'][0]['column'] != '') {
+        if(isset($containerData['order'][0]['column']) && $containerData['order'][0]['column'] != '') {
             $order_by = '';
                 if (isset($containerData['order'][0]['dir']) && $containerData['order'][0]['dir'] != '') {
                     $order_by = $columns[$containerData['order'][0]['column']];
@@ -94,7 +93,6 @@ class ContainerlistController extends Controller
 			"recordsFiltered" => intval($totalFiltered),
 			"data" => $data,
 		);
-
 		echo json_encode($json_data);
 		exit(0);
     }
