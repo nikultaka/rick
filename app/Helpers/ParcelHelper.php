@@ -76,7 +76,7 @@ class ParcelHelper
             "RESULT"  => []
         ];
 
-        (new Response($validationErrorResponse, config('HttpCodes.required')))->header('Content-Type', 'application/json')->send();
+        (new Response($validationErrorResponse, config('HttpCodes.success')))->header('Content-Type', 'application/json')->send(); //config('HttpCodes.required')
         exit;
     }
 
