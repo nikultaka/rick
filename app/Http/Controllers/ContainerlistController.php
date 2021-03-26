@@ -1,18 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Api\v1;
 namespace App\Http\Controllers;
-
-use App\Models\ContainerType;
-use App\Models\Container;
 use Illuminate\Http\Request;
-use App\Http\Requests\CommentRequest;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Comment\CommentResource;
-use App\Http\Resources\Comment\CommentCollection;
-use Symfony\Component\HttpFoundation\Response;
-use App\Helpers\ParcelHelper;
-use Illuminate\Support\Facades\Auth;
 use DB;
 use PDF;
 
@@ -21,8 +11,6 @@ class ContainerlistController extends Controller
     public function index() {
     	return view('container/container_list');
     }
-
-
 	public function weighTicketsview(){
     	return view('container/weigh_tickets');
 	}
@@ -174,7 +162,9 @@ class ContainerlistController extends Controller
 			$temp['container_number'] = $row->container_number;
 			$temp['container_type'] = $row->container_type;
 			$getPDFurl = url('/getPdf' , $row->id);
-			$temp['weighing_slip'] = '<div class="sub-menu"><a href="'.$getPDFurl.'" class="link"><i class="fa fa-file-text" style="font-size:25px;"><span class="badge badge-pill menu-title">Download</span></i></a>';
+			$temp['weighing_slip'] = '<div class="sub-menu"><a href="'.$getPDFurl.'" class="link">
+									 <i class="fa fa-file-text" style="font-size:25px;">
+									 <span class="badge badge-pill menu-title">Download</span></i></a>';
 			$data[] = $temp;
 		}
         $json_data = array(
@@ -190,11 +180,11 @@ class ContainerlistController extends Controller
 	public function getPDF($id){
 		$WeighTicketsDetails = DB::table('containers')
 						->select('containers.*', 'container_type.container_type as container_type')
-						->leftjoin("container_type", "container_type.id", "=", "containers.container_type")
+						->leftjoin("container_type", "container_type.id","=","containers.container_type")
 						->where('containers.id',$id)
 						->first();
 		$pdf = PDF::loadView('container/DownloadPDF',['WeighTicketsDetails' => $WeighTicketsDetails]);
-		return $pdf->download('WeighTicketsDetails.pdf');	
+		return $pdf->download('WeightTicketsDetails.pdf');	
 		return view('DownloadPDF');
 	}
 }

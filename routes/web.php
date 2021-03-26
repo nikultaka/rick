@@ -28,4 +28,8 @@ Route::get('/home', 'HomeController@index')->name('home');
         Route::get('/getPdf/{id}', 'ContainerlistController@getPDF');
         Route::post('/getListWeighTickets', 'ContainerlistController@getListWeighTickets');
 
+        Route::get('/corporate-information', 'Frontend\CorporateInformationController@index');
+        Route::post('/insertCorporateInformation', 'Frontend\CorporateInformationController@insertcorporateinformation');
+
+
     });

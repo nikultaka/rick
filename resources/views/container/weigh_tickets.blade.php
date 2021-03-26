@@ -16,6 +16,9 @@
             color: black;
             text-decoration: none;
             }
+            a:hover, a:focus {
+            color: black;
+            }
             .sub-menu .menu-title {
             display: block;
             margin-top: 5px;
