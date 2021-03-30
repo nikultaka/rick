@@ -2,11 +2,11 @@
     <ul class="sidebar-links">
         <li class="tab-list"><a href="#" class="link"><span class="img-icon"><img class="img"
                         src="{{ asset('stylecontainer/images/home.png') }}" alt="icon"></span>Dashboard</a></li>
-        <li class="tab-list"><a href="/container-list" class="link"><span class="img-icon"><img class="img"
+        <li class="tab-list"><a href="{{ route('container-list') }}" class="link"><span class="img-icon"><img class="img"
                         src="{{ asset('stylecontainer/images/Shipping_Container.png') }}"
                         alt="icon"></span>Storage</a>
         </li>
-        <li class="tab-list"><a href="/weighTickets-list" class="link"><span class="img-icon"><img class="img"
+        <li class="tab-list"><a href="{{ route('weightickets-list') }}" class="link"><span class="img-icon"><img class="img"
                         src="{{ asset('stylecontainer/images/Scales.png') }}" alt="icon"></span>Weigh tickets</a></li>
         <li class="tab-list"><a href="#" class="link"><span class="img-icon"><img class="img"
                         src="{{ asset('stylecontainer/images/Purchase_Order.png') }}" alt="icon"></span>Invoices</a>
