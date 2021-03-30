@@ -11,25 +11,30 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
+// theme implementation
+Route::get('/', 'containertheme\MainthemepageController@login');
+Route::get('/maintheme-page', 'containertheme\MainthemepageController@login');
 
-    Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth']], function () { 
+        Route::get('/dashboard-theme', 'containertheme\DashboardthemeController@index');
+       
+        Route::get('/corporate-information', 'Frontend\CorporateInformationController@index');
+        Route::post('/insertCorporateInformation', 'Frontend\CorporateInformationController@insertcorporateinformation');
+        
         Route::get('/container-list', 'ContainerlistController@index');
         Route::post('/getListContainer', 'ContainerlistController@getListContainer');
+
         Route::get('/weighTickets-list', 'ContainerlistController@weighTicketsview');
         Route::get('/getPdf/{id}', 'ContainerlistController@getPDF');
         Route::post('/getListWeighTickets', 'ContainerlistController@getListWeighTickets');
-
-        Route::get('/corporate-information', 'Frontend\CorporateInformationController@index');
-        Route::post('/insertCorporateInformation', 'Frontend\CorporateInformationController@insertcorporateinformation');
-
-
     });
+

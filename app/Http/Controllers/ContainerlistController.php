@@ -9,10 +9,10 @@ use PDF;
 class ContainerlistController extends Controller
 {
     public function index() {
-    	return view('container/container_list');
+    	return view('container/containerlist_contant');
     }
 	public function weighTicketsview(){
-    	return view('container/weigh_tickets');
+    	return view('container/weigh_content');
 	}
 
     public function getListContainer(Request $request){
@@ -26,7 +26,7 @@ class ContainerlistController extends Controller
         if(isset($containerData['search']['value']) && $containerData['search']['value'] != ''){
 			$getDatasql->where('stack','!=','');
             $search = $containerData['search']['value'];
-            $getDatasql->where('containers.container_type','like','%'.$search.'%')
+            $getDatasql->where('container_type.container_type','like','%'.$search.'%')
                        ->orWhere('containers.id','like','%'.$search.'%')
 			           ->orWhere('containers.container_number','like','%'.$search.'%')
 			           ->orWhere('containers.pin','like','%'.$search.'%')
@@ -83,12 +83,12 @@ class ContainerlistController extends Controller
 			if($row->adr == 1){
 				$adrstatus = 'checked';
 			}
-			$temp['adr'] = '<input type="checkbox" class="form-check-input" '.$adrstatus.'>';
+			$temp['adr'] = '<input type="checkbox"  '.$adrstatus.'>';
 			$gensetstatus = '';
 			if($row->genset != ''){
 				$gensetstatus = 'checked';
 			}
-			$temp['genset'] = '<input type="checkbox" class="form-check-input" '.$gensetstatus.'>';
+			$temp['genset'] = '<input type="checkbox"  '.$gensetstatus.'>';
 			$data[] = $temp;
 		}
         $json_data = array(
@@ -116,7 +116,7 @@ class ContainerlistController extends Controller
     					   ->where('containers.id','like','%'.$search.'%')
 						   ->orWhere('containers.reference','like','%'.$search.'%')
 						   ->orWhere('containers.created_at','like','%'.$search.'%')
-						   ->orWhere('containers.container_type','like','%'.$search.'%')
+						   ->orWhere('container_type.container_type','like','%'.$search.'%')
 				           ->orWhere('containers.container_number','like','%'.$search.'%')
 				           ->orWhere('containers.weight','like','%'.$search.'%')
 				           ->orWhere('containers.license_plate','like','%'.$search.'%');

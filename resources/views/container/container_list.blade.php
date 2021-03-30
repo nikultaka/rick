@@ -1,16 +1,5 @@
-<html>
-<head>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js" ></script>
-    <title>Container List</title>
-    <script type="text/javascript">
-          var BASE_URL="{{url('/')}}";
-    </script>
-</head>
-<body>
+<div class="container">
+  <div class="table-responsive">
     <table class="table table-bordered table-hover" id="service-table">
         {{ csrf_field() }}
           <thead>
@@ -26,7 +15,7 @@
             <th>Genset</th>    
           </thead>  
     </table>
-</body>
+  </div>
+</div>
 <script type="text/javascript"> var url="{{url('/getListContainer')}}";</script>
 <script type="text/javascript" src="{{ asset('container_js/container_script.js')}}"></script>
-</html>

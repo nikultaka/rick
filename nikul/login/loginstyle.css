@@ -1,0 +1,132 @@
+body{
+    font-family: Roboto;
+    font-weight: 400;
+    font-size: 14px;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.login-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    text-align: end;
+    flex-direction: column;
+    position: relative;
+    padding: 0 20px 77px 20px;
+}
+.login-wrapper  .stratent-img {
+    width: 100%;
+    max-width: 13.6%;
+    position: absolute;
+    bottom: 33px;
+    right: 0;
+}
+.login-wrapper  .stratent-img > img {
+    width: 100%;
+    height: auto;
+}
+.login-container {
+    margin-top: 25px;
+    width: 100%;
+}
+.title {
+    width: 100%;
+    max-width: 44.4%;
+    margin: 0 auto 46px auto;
+}
+.title > .title_img, .rtrack-logo_img > .track-img{
+    width: 100%;
+    height: auto;
+}
+.rtrack-logo_img {
+    width: 100%;
+    max-width: 45.7%;
+    margin: 0 auto 12px auto;
+}
+.form-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.form-group .input-group {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 36px;
+}
+.form-group .form-action {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+}
+.form-group .control {
+    width: 100%;
+    max-width: 35%;
+    min-width: 276px;
+}
+.form-group .control > input {
+    width: 100%;
+    text-align: center;
+    border: 1px solid #16110D;
+    padding: 23px 15px;
+    border-radius: 45px;
+    font-size: 20px;
+    font-weight: 200;
+    color: #8C8C8C;
+}
+.form-group .control > input:focus {
+    outline: none;
+}
+.form-group .psw-group{
+    margin-bottom: 61px;
+}
+.form-action  .forgot-psw {
+    margin-bottom: 56px;
+}
+.forgot-psw .forgot-psw-link{
+    color: #000;
+    font-size: 15px;
+    text-decoration: none;
+}
+.form-action .confirm {
+    width: 100%;
+    max-width: 15.4%;
+}
+.form-action .confirm .confrm-link{
+    width:100%;
+    height: auto;
+}
+@media(max-width:768px){
+    .login-wrapper {
+        padding: 0 20px 20px 20px;
+    }
+    .rtrack-logo_img, .title  {
+        max-width: 70%;
+    }
+    .form-group .control > input {
+        padding: 20px 15px;
+        font-size: 16px;
+    }
+    .form-group .input-group {
+        margin-bottom: 25px;
+    }
+    .form-group .psw-group {
+        margin-bottom: 30px;
+    }
+    .form-action .confirm {
+        max-width: 130px;
+    }
+    .form-action .forgot-psw {
+        margin-bottom: 30px;
+    }
+    .login-wrapper .stratent-img {
+        max-width: 17.6%;
+        bottom: 10px;
+        right: 10px;
+    }
+}

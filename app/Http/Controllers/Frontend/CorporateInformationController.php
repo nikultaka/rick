@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 use DB;
 use App\Helpers\ParcelHelper;
-use App\Models\corporateinformation;
+use App\Models\CorporateInformation;
 
 
 class CorporateInformationController extends Controller
@@ -15,13 +15,13 @@ class CorporateInformationController extends Controller
     public function index(){
     	// return view('container/corporate_information');
         $userId = Auth::id();
-        $editdatasql = corporateinformation::where('userId',$userId)->first();
+        $editdatasql = CorporateInformation::where('userId',$userId)->first();
         $result['data']=$editdatasql;
         
-        return view('container/corporate_information')->with($result);
+        return view('container/corporate_info')->with($result);
     }
 
-    private static function corporateinformationValidationRules(): array
+    private static function CorporateInformationValidationRules(): array
     {
         return [
             'address1'              => 'required',
@@ -35,17 +35,17 @@ class CorporateInformationController extends Controller
             'invoiceemail'          => 'required',   
         ];
     }
-    public function insertcorporateinformation(Request $request){
+    public function insertCorporateInformation(Request $request){
     try{
         $userId = Auth::id();
-        ParcelHelper::validateRequest($request->all(), self::corporateinformationValidationRules($request->all()));
+        ParcelHelper::validateRequest($request->all(), self::CorporateInformationValidationRules($request->all()));
         $corporateData =$request->all();
-        $getDatasql = corporateinformation::where('userId',$userId)->first();
+        $getDatasql = CorporateInformation::where('userId',$userId)->first();
         $data = array();
         $data['status'] = 0;
         $data['msg'] = "Error Your Data insert Unsuccessful !";
         if($getDatasql == ''){
-        $corporateDataInsert = new corporateinformation();
+        $corporateDataInsert = new CorporateInformation();
             $corporateDataInsert->address1      = $corporateData['address1'];
             $corporateDataInsert->address2      = $corporateData['address2'];
             $corporateDataInsert->state         = $corporateData['state'];
@@ -64,7 +64,7 @@ class CorporateInformationController extends Controller
                 $data['msg'] = "Data insert Successfully !";
             }
         }else{
-            $UpdateDetails = corporateinformation::where('userId',$userId)->first();
+            $UpdateDetails = CorporateInformation::where('userId',$userId)->first();
                 $UpdateDetails->address1          = $corporateData['address1'];
                 $UpdateDetails->address2          = $corporateData['address2'];
                 $UpdateDetails->state             = $corporateData['state'];
