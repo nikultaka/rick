@@ -106,6 +106,7 @@ class ContainerlistController extends Controller
 		$data = array();
 		$weighTicketSql = DB::table('containers')
 						->where('stack','')
+						->orWhere('stack',null)
 						->select('containers.*', 'container_type.container_type as container_type')
 					    ->leftjoin("container_type", "container_type.id", "=", "containers.container_type");
 

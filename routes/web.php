@@ -32,8 +32,7 @@ Route::group(['middleware' => ['auth']], function () {
         
         Route::get('/container-list', 'ContainerlistController@index');
         Route::post('/getListContainer', 'ContainerlistController@getListContainer');
-
-        Route::get('/weighTickets-list', 'ContainerlistController@weighTicketsview');
+        Route::get('/weightickets-list', 'ContainerlistController@weighTicketsview');
         Route::get('/getPdf/{id}', 'ContainerlistController@getPDF');
         Route::post('/getListWeighTickets', 'ContainerlistController@getListWeighTickets');
     });

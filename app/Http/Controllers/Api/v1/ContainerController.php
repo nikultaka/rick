@@ -58,7 +58,7 @@ class ContainerController extends Controller
                 $container->user_id = $user->id;
                 $container->container_number = $request->container_number;
                 $container->container_type = $request->container_type;
-                $container->weight = $request->container_number;
+                $container->weight = $request->weight;
                 $container->reference = $request->reference;
                 $container->license_plate = $request->license_plate;
                 $container->transporter_id = $request->transporter_id;
