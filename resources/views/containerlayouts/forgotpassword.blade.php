@@ -1,6 +1,6 @@
 @extends('containerlayouts.index')
-
-@section('content')
+@section('title', 'New Password')
+@section('logincontent')
 <div class="login-wrapper">
     <div class="login-container">
         <div class="title">
@@ -11,7 +11,11 @@
             <img class="track-img" src="{{ asset('stylecontainer/images/rtrack_logo_img.png') }}" alt="title">
         </div>
         <div class="card">
-            <div class="card-header">{{ __('Forgot Password') }}</div>
+            <div class="form-group row">
+                <div class="input-group username-group">
+                    <div class="card-header"><h1>{{ __('Enter your new Password') }}</h1></div>
+                </div>
+            </div>
             <div class="card-body">
                 <form method="POST" action="{{ route('password.update') }}">
                     @csrf
@@ -30,9 +34,9 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="input-group psw-group">
-                                <div class="control psw-control">
-                                    <input type="password" name="password" class="psw-input input @error('password') is-invalid @enderror" placeholder="Password">
+                            <div class="input-group username-group">
+                                <div class="control username-control">
+                                    <input type="password" name="password" class="username-input input @error('password') is-invalid @enderror" placeholder="Password">
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -40,10 +44,9 @@
                                     @enderror
                                 </div>
                             </div>
-
                             <div class="input-group psw-group">
                                 <div class="control psw-control">
-                                    <input type="password" name="password_confirmation" id="password-confirm" class="psw-input input @error('password') is-invalid @enderror" placeholder="Password">
+                                    <input type="password" name="password_confirmation" id="password-confirm" class="psw-input input @error('password') is-invalid @enderror" placeholder="Confirm Password">
                                 </div>
                             </div>
 
@@ -55,7 +58,6 @@
                                     </button>
                                 </span>
                             </div>
-                            
                         </div>
                     </div>
                     <div class="stratent-img">
@@ -63,5 +65,7 @@
                     </div>
                 </form>
             </div>
-
+        </div>
+    </div>
+</div>
         @endsection

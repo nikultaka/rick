@@ -20,19 +20,24 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
+
 // theme implementation
 Route::get('/', 'containertheme\MainthemepageController@login');
-Route::get('/', 'containertheme\MainthemepageController@login');
-Route::get('/maintheme-page', 'containertheme\MainthemepageController@login');
+Route::get('/login', 'containertheme\MainthemepageController@login')->name('login');
+Route::get('/forgotpassword', 'containertheme\MainthemepageController@forgotpassword')->name('forgotpassword');
+Route::get('/newpassword/{token}', 'containertheme\MainthemepageController@newpassword')->name('newpassword');
+Route::get('/register', 'containertheme\MainthemepageController@register')->name('register');
 
+// after login
 Route::group(['middleware' => ['auth']], function () { 
         Route::get('/dashboard-theme', 'containertheme\DashboardthemeController@index');
        
-        Route::get('/corporate-information', 'Frontend\CorporateInformationController@index');
+        Route::get('/corporate-information', 'Frontend\CorporateInformationController@index')->name('corporate-information');
         Route::post('/insertCorporateInformation', 'Frontend\CorporateInformationController@insertcorporateinformation');
         
         Route::get('/container-list', 'ContainerlistController@index')->name('container-list');
         Route::post('/getListContainer', 'ContainerlistController@getListContainer');
+
         Route::get('/weightickets-list', 'ContainerlistController@weighTicketsview')->name('weightickets-list');
         Route::get('/getPdf/{id}', 'ContainerlistController@getPDF');
         Route::post('/getListWeighTickets', 'ContainerlistController@getListWeighTickets');

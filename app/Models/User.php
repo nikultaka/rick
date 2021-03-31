@@ -7,9 +7,18 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\Container;
+use App\Notifications\PasswordReset;
 
 class User extends Authenticatable
-{
+{   /*
+    * @param  string  $token
+    * @return void
+    */
+   public function sendPasswordResetNotification($token)
+   {
+       $this->notify(new PasswordReset($token));
+   }
+
     use HasApiTokens, Notifiable;
 
     /**
@@ -20,6 +29,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password','roles'
     ];
+
+    
 
     /**
      * The attributes that should be hidden for arrays.

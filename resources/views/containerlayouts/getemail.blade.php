@@ -1,5 +1,5 @@
 @extends('containerlayouts.index')
-@section('title', 'Login Page')
+@section('title', 'Forgot Password')
 @section('logincontent')
 
     <div class="login-wrapper">
@@ -12,11 +12,14 @@
                 <img class="track-img" src="{{ asset('stylecontainer/images/rtrack_logo_img.png') }}" alt="title">
             </div>
             <div class="card">
-
+                <div class="form-group row">
+                    <div class="input-group username-group">
+                    <div class="card-header"><h2>{{ __('Enter your register email we send a link for reset your password.') }}</h2></div>
+                    </div>
+                </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('password.email') }}">
                         @csrf
-
                         <div class="form-group row">
                             <div class="form-group">
                                 <div class="input-group username-group">
@@ -46,4 +49,7 @@
                         </div>
                     </form>
                 </div>
+            </div>
+        </div>
+    </div>
             @endsection
