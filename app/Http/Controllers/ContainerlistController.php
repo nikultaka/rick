@@ -83,12 +83,16 @@ class ContainerlistController extends Controller
 			$adrstatus = '';
 			if($row->adr == 1){
 				$adrstatus = 'checked';
-			}
+			}else{
+				$adrstatus = 'disabled';
+            }
 			$temp['adr'] = '<input type="checkbox"  '.$adrstatus.'>';
 			$gensetstatus = '';
 			if($row->genset != ''){
 				$gensetstatus = 'checked';
-			}
+			}else{
+				$gensetstatus = 'disabled';
+            }
 			$temp['genset'] = '<input type="checkbox"  '.$gensetstatus.'>';
 			$data[] = $temp;
 		}

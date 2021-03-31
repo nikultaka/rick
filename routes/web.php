@@ -41,5 +41,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/weightickets-list', 'ContainerlistController@weighTicketsview')->name('weightickets-list');
         Route::get('/getPdf/{id}', 'ContainerlistController@getPDF');
         Route::post('/getListWeighTickets', 'ContainerlistController@getListWeighTickets');
+
+        Route::get('/handlingstatus', 'Frontend\HandlingstatusController@index')->name('handlingstatus');
+        Route::post('/gethandlingstatus', 'Frontend\HandlingstatusController@gethandlingstatus');
+
+
     });
 

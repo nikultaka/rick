@@ -16,7 +16,7 @@
             <img class="img" src="{{ asset('stylecontainer/images/Purchase_Order.png') }}" alt="icon">
             </span>Invoices</a>
         </li>
-        <li class="tab-list"><a href="#" class="link"><span class="img-icon">
+        <li class="tab-list"><a href="{{ route('handlingstatus') }}" class="link"><span class="img-icon">
             <img class="img" src="{{ asset('stylecontainer/images/Fork Lift.png') }}" alt="icon">
             </span>Handling</a>
         </li>

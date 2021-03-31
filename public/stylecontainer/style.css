@@ -139,12 +139,13 @@ img{
     font-size: 40px;
     font-weight: 400;
 }
-.dashbord-container .right-content  .stratent-img{
+.dashbord-container .right-content  .stratent-img {
     position: absolute;
     right: 4%;
     max-width: 18%;
     bottom: 24px;
 }
+
 @media(max-width:768px){
     .dashbord-header {
         padding: 17px 20px;

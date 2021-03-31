@@ -28,17 +28,19 @@
         @include('adminlayouts.header')
         <div class="dashbord-container">
             @include('adminlayouts.sidebar')
-                <div class="right-content">
-                    <div class="dashboard-title">
-                        <h1 class="title">@yield('dashboardtitle') </h1>
-                    </div>
-                {{-- dashboard all content is  --}}
+            <div class="right-content">
+                <div class="dashboard-title">
+                    <h1 class="title">@yield('dashboardtitle') </h1>
+                </div>
+                {{-- dashboard all content is --}}
                 @yield('content')
-                {{-- content end --}}
-                    <div class="stratent-img">
-                        <img src="{{ asset('stylecontainer/images/logo@1x 1.png') }}">
-                    </div>
+         
+            {{-- content end --}}
+            <div class="stratent-img">
+                <img src="{{ asset('stylecontainer/images/logo@1x 1.png') }}">
             </div>
+               </div>
+
         </div>
     </div>
     <!-- jquery for toggle sidebar -->
