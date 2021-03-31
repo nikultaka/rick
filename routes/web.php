@@ -22,6 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // theme implementation
 Route::get('/', 'containertheme\MainthemepageController@login');
+Route::get('/', 'containertheme\MainthemepageController@login');
 Route::get('/maintheme-page', 'containertheme\MainthemepageController@login');
 
 Route::group(['middleware' => ['auth']], function () { 
