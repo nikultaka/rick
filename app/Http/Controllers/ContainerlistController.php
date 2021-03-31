@@ -69,6 +69,7 @@ class ContainerlistController extends Controller
 		if (isset($containerData['start']) && $containerData['start'] != '' && isset($containerData['length']) && $containerData['length'] != '') {
 			$getDatasql->limit($containerData['length'])->offset($containerData['start']);
 		}
+		$getDatasql -> orWhereNotNull('stack');
         $listall=$getDatasql->get();
         foreach ($listall as $key => $row) {
 			$temp['ticker_number'] = $key+1;
@@ -106,15 +107,13 @@ class ContainerlistController extends Controller
 		$data = array();
 		$weighTicketSql = DB::table('containers')
 						->where('stack','')
-						->orWhere('stack',null)
 						->select('containers.*', 'container_type.container_type as container_type')
 					    ->leftjoin("container_type", "container_type.id", "=", "containers.container_type");
 
 		if(isset($weighTicketData['search']['value']) && $weighTicketData['search']['value'] != '')
 		{
 			$search = $weighTicketData['search']['value'];
-			$weighTicketSql->where('stack','')
-    					   ->where('containers.id','like','%'.$search.'%')
+			$weighTicketSql->where('containers.id','like','%'.$search.'%')
 						   ->orWhere('containers.reference','like','%'.$search.'%')
 						   ->orWhere('containers.created_at','like','%'.$search.'%')
 						   ->orWhere('container_type.container_type','like','%'.$search.'%')
@@ -152,7 +151,7 @@ class ContainerlistController extends Controller
 		if (isset($weighTicketData['start']) && $weighTicketData['start'] != '' && isset($weighTicketData['length']) && $weighTicketData['length'] != '') {
 			$weighTicketSql->limit($weighTicketData['length'])->offset($weighTicketData['start']);
 		}
-
+		$weighTicketSql -> orwhereNull('stack');
 		$listall=$weighTicketSql->get();
         foreach ($listall as $key => $row) {
 			$temp['ticker_number'] = $key+1;

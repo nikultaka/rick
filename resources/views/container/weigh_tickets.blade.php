@@ -19,7 +19,7 @@
   <div class="container">
     <table class="table table-bordered table-hover" id="weightickets-table">
         {{ csrf_field() }}
-          <thead>
+          <thead class="table-secondary">
             <th>Ticker number</th>
             <th>Reference</th>
             <th>Date and time </th>    
