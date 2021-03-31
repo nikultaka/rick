@@ -1,4 +1,4 @@
-{{-- @extends('adminlayouts.main')
+@extends('adminlayouts.main')
 @section('title', 'Dasboard')
 @section('content')
 
@@ -10,5 +10,4 @@
         <img src="{{asset('stylecontainer/images/logo@1x 1.png')}}">
      </div>
 </div>
-
-@endsection --}}
+@endsection
