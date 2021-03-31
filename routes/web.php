@@ -31,9 +31,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/corporate-information', 'Frontend\CorporateInformationController@index');
         Route::post('/insertCorporateInformation', 'Frontend\CorporateInformationController@insertcorporateinformation');
         
-        Route::get('/container-list', 'ContainerlistController@index');
+        Route::get('/container-list', 'ContainerlistController@index')->name('container-list');
         Route::post('/getListContainer', 'ContainerlistController@getListContainer');
-        Route::get('/weightickets-list', 'ContainerlistController@weighTicketsview');
+        Route::get('/weightickets-list', 'ContainerlistController@weighTicketsview')->name('weightickets-list');
         Route::get('/getPdf/{id}', 'ContainerlistController@getPDF');
         Route::post('/getListWeighTickets', 'ContainerlistController@getListWeighTickets');
     });
