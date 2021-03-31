@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 class DashboardthemeController extends Controller
 {
     public function index(){
-       
     	return view('container/dashboard');
     }
 }
