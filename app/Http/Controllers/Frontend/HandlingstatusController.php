@@ -8,7 +8,7 @@ use DB;
 class HandlingstatusController extends Controller
 {
     public function index() {
-    	return view('container/Handling_status');
+    	return view('container/handling_status');
     }
 
     public function gethandlingstatus(Request $request){
