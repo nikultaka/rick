@@ -27,11 +27,12 @@ class HandlingstatusController extends Controller
 			           ->orWhere('containers.license_plate','like','%'.$search.'%')
 			           ->orWhere('containers.reference','like','%'.$search.'%')
 			           ->orWhere('containers.handling_status','like','%'.$search.'%')
+			           ->orWhere('containers.action_type','like','%'.$search.'%')
 			           ->orWhere('containers.created_at','like','%'.$search.'%');
         }	
         $columns = array(
 			0 => 'containers.id',
-			1 => 'containers.pin',
+			1 => 'containers.action_type',
 			2 => 'containers.created_at',
 			3 => 'containers.pin',
 			4 => 'containers.license_plate',
@@ -66,7 +67,7 @@ class HandlingstatusController extends Controller
         $listall=$getDatasql->get();
         foreach ($listall as $key => $row) {
 			$temp['ticker_number'] = $key+1;
-			$temp['kind_of_action'] = $row->pin;
+			$temp['kind_of_action'] = $row->action_type;
 			$temp['date_time'] = $row->created_at != '' ? date('d-m-Y h:i', strtotime($row->created_at)) : '';
 			$temp['Pincode'] = $row->pin;
 			$temp['lisence_plate'] = $row->license_plate;

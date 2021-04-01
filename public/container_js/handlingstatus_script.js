@@ -1,15 +1,19 @@
 $(document).ready(function(){
     loaddata();
+  
 });
-
 function loaddata(){
-    $('#service-table').dataTable({
+   var dataTable = $('#service-table').dataTable({
+        "dom": '<"top"i>rt<"bottom"flp><"clear">',
         "paging": true,
         "pageLength": 10,
         "bProcessing": true,
         "serverSide": true,
          "bDestroy": true,
-        "ajax":{
+         "bPaginate": false,  
+         "bAutoWidth": false,
+         "bInfo" : false,
+         "ajax":{
             url: BASE_URL + '/gethandlingstatus',
          
             type:'POST',
@@ -36,5 +40,9 @@ function loaddata(){
             "orderable": false
         }]
 });
+
+$("#searchbox").keyup(function() {
+    dataTable.fnFilter(this.value);
+ });   
 }
 

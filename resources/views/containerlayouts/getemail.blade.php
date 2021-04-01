@@ -12,11 +12,7 @@
                 <img class="track-img" src="{{ asset('stylecontainer/images/rtrack_logo_img.png') }}" alt="title">
             </div>
             <div class="card">
-                <div class="form-group row">
-                    <div class="input-group username-group">
-                    <div class="card-header"><h2>{{ __('Enter your register email we send a link for reset your password.') }}</h2></div>
-                    </div>
-                </div>
+              
                 <div class="card-body">
                     <form method="POST" action="{{ route('password.email') }}">
                         @csrf
@@ -26,12 +22,16 @@
                                     <div class="control user-control">
                                         <input type="text" name="email"
                                             class="username-input input @error('email') is-invalid @enderror"
-                                            placeholder="Email">
+                                            placeholder="Enter Your register email">
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
+                                        <h2 style="margin-top :15px;">{{ __('Enter your register email we will send a link for reset your password....') }}</h2>
+                                    </div>
+                                </div>
+                                    <div class="control user-control">
                                     </div>
                                 </div>
                                 <div class="form-action">
@@ -52,4 +52,4 @@
             </div>
         </div>
     </div>
-            @endsection
+ @endsection

@@ -4,6 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ asset('stylecontainer/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('stylecontainer/datatable.css') }}">
     <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
@@ -17,7 +18,6 @@
 
     <script type="text/javascript">
         var BASE_URL = "{{ url('/') }}";
-
     </script>
 
     <title> @yield('title') </title>
@@ -32,27 +32,25 @@
                 <div class="dashboard-title">
                     <h1 class="title">@yield('dashboardtitle') </h1>
                 </div>
+
                 {{-- dashboard all content is --}}
-
                 @yield('content')
+                {{-- content end --}}
 
-         
-            {{-- content end --}}
-            <div class="stratent-img">
-                <img src="{{ asset('stylecontainer/images/logo@1x 1.png') }}">
+                <div class="stratent-img">
+                    <img src="{{ asset('stylecontainer/images/logo@1x 1.png') }}">
+                </div>
             </div>
-               </div>
 
         </div>
     </div>
     <!-- jquery for toggle sidebar -->
     <script>
-        $(document).ready(function() {
-            $(".toggle").click(function() {
-                $("#sidebar").toggle("3000");
-            });
-        });
-
+        $(document).ready(function(){
+             $(".toggle").click(function(){
+             $("#sidebar").toggle("3000");
+          });
+        }); 
     </script>
 </body>
 

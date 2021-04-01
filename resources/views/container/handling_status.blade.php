@@ -1,7 +1,7 @@
 @extends('adminlayouts.main')
 
 @section('title','Handling')
-@section('dashboardtitle','Weigh Tickets')
+@section('dashboardtitle','Handling')
 
 @section('content')
     @include('container.handlingstatus')

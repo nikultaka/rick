@@ -7,19 +7,13 @@
             <img class="title_img" src="{{ asset('stylecontainer/images/A15-containerservices-tekst 1.png') }}"
                 alt="title">
         </div>
-        <div class="rtrack-logo_img">
+        <div class="rtrack-logo_img" style="width:40%">
             <img class="track-img" src="{{ asset('stylecontainer/images/rtrack_logo_img.png') }}" alt="title">
         </div>
         <div class="card">
-            <div class="form-group row">
-                <div class="input-group username-group">
-                    <div class="card-header"><h1>{{ __('Enter your new Password') }}</h1></div>
-                </div>
-            </div>
             <div class="card-body">
                 <form method="POST" action="{{ route('password.update') }}">
                     @csrf
-
                     <input type="hidden" name="token" value="{{ $token }}">
 
                     <div class="form-group row">
@@ -36,7 +30,7 @@
                             </div>
                             <div class="input-group username-group">
                                 <div class="control username-control">
-                                    <input type="password" name="password" class="username-input input @error('password') is-invalid @enderror" placeholder="Password">
+                                    <input type="password" name="password" class="username-input input @error('password') is-invalid @enderror" placeholder="New password">
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

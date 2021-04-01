@@ -18,20 +18,19 @@ class ContainerlistController extends Controller
     public function getListContainer(Request $request){
         $data = array();
         $containerData = $request->all();
-        $getDatasql = DB::table('containers');
-		$getDatasql->where('stack','!=','')
+        $getDatasql = DB::table('containers')
+				   ->where('stack','!=','')
 				   ->select('containers.*', 'container_type.container_type as container_type')
 				   ->leftjoin("container_type", "container_type.id", "=", "containers.container_type");
 
         if(isset($containerData['search']['value']) && $containerData['search']['value'] != ''){
-			$getDatasql->where('stack','!=','');
+
             $search = $containerData['search']['value'];
-            $getDatasql->where('container_type.container_type','like','%'.$search.'%')
-                       ->orWhere('containers.id','like','%'.$search.'%')
+            $getDatasql->where('containers.reference','like','%'.$search.'%')
 			           ->orWhere('containers.container_number','like','%'.$search.'%')
 			           ->orWhere('containers.pin','like','%'.$search.'%')
 			           ->orWhere('containers.license_plate','like','%'.$search.'%')
-			           ->orWhere('containers.reference','like','%'.$search.'%')
+			           ->orWhere('container_type.container_type','like','%'.$search.'%')
 			           ->orWhere('containers.leeg','like','%'.$search.'%')
 			           ->orWhere('containers.created_at','like','%'.$search.'%');
         }	
@@ -69,7 +68,7 @@ class ContainerlistController extends Controller
 		if (isset($containerData['start']) && $containerData['start'] != '' && isset($containerData['length']) && $containerData['length'] != '') {
 			$getDatasql->limit($containerData['length'])->offset($containerData['start']);
 		}
-		$getDatasql -> orWhereNotNull('stack');
+		// $getDatasql -> orWhereNotNull('stack');
         $listall=$getDatasql->get();
         foreach ($listall as $key => $row) {
 			$temp['ticker_number'] = $key+1;
