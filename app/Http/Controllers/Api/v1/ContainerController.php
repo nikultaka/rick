@@ -56,6 +56,7 @@ class ContainerController extends Controller
              //if($request->is_save == '1') {
                 $container = new Container();
                 $container->user_id = $user->id;
+                $container->action_type = 'wegen';
                 $container->container_number = $request->container_number;
                 $container->container_type = $request->container_type;
                 $container->weight = $request->weight;
@@ -173,6 +174,7 @@ class ContainerController extends Controller
 
             $container = new Container();
             $container->user_id = $user->id;
+            $container->action_type = $request->action_type;
             $container->container_number = $request->container_number;
             $container->container_type = $request->container_type;
             $container->weight = $request->weight;
@@ -263,6 +265,33 @@ class ContainerController extends Controller
             if(isset($request->is_checked) && $request->is_checked!='') {
                 $handlingStatus = 2;
             }
+
+
+            $container = [];
+            $user = Auth::user();
+            $username = $user->name;    
+
+            $container = new Container();
+            $container->user_id = $user->id;
+            $container->action_type = 'handeling';
+            $container->container_number = $request->container_number;
+            $container->container_type = $request->container_type;
+            $container->weight = '';
+            if(isset($request->weight) && $request->weight!='') {
+                $container->weight = $request->weight;    
+            }
+            if(isset($request->reference) && $request->reference!='') {
+                $container->reference = $request->reference;        
+            }  
+
+            $prefix = '';
+            for($i = 0; $i < 6; $i++){
+                $prefix .= random_int(0,1) ? chr(random_int(65, 90)) : random_int(0, 9);
+            }
+            $container->pin = $prefix;
+            $container->save();
+
+
             if(isset($request->container_number) && $request->container_number!='') {
                 $container_number = $request->container_number;    
                 $containerData = Container::where('container_number',$container_number)->orderBy('id', 'DESC')->get()->toArray();    
