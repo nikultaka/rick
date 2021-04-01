@@ -67,7 +67,7 @@ class HandlingstatusController extends Controller
         $listall=$getDatasql->get();
         foreach ($listall as $key => $row) {
 			$temp['ticker_number'] = $key+1;
-			$temp['kind_of_action'] = $row->action_type;
+			$temp['kind_of_action'] = ucfirst($row->action_type);
 			$temp['date_time'] = $row->created_at != '' ? date('d-m-Y h:i', strtotime($row->created_at)) : '';
 			$temp['Pincode'] = $row->pin;
 			$temp['lisence_plate'] = $row->license_plate;

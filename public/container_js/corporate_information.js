@@ -47,7 +47,10 @@ $(document).ready(function () {
                     success: function (response) {
                         var response = JSON.parse(response);
                         if (response.status == 1) {
-                            alert(response.msg);
+                            Swal.fire({
+                              icon: 'success',
+                              title: 'Data updated successfully',
+                            })
                         }
                     }
                 });

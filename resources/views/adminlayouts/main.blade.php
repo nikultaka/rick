@@ -15,6 +15,7 @@
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <script type="text/javascript">
         var BASE_URL = "{{ url('/') }}";
@@ -51,6 +52,16 @@
              $("#sidebar").toggle("3000");
           });
         }); 
+         function logout() {
+            Swal.fire({
+              icon: 'info',
+              title : 'Do you really want to logout?',
+              showCancelButton: true,
+              preConfirm: (login) => {
+                    document.getElementById("logout-form").submit()
+              }
+            });
+          }   
     </script>
 </body>
 

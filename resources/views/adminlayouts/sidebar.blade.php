@@ -30,10 +30,8 @@
         <a href="#" class="setting"><img class="img" src="{{ asset('stylecontainer/images/setting.png') }}"
                 alt="setting-img"></a>
         <span class="setting-text">Setting</span>
-        <a class="log-out" href="{{ route('logout') }}" 
-                onclick='event.preventDefault(); 
-                var check = confirm("Do you really want to logout?");
-                if(check){document.getElementById("logout-form").submit();}'>
+        <a class="log-out" href="javascript:void(0);" 
+                onclick='logout();'>
             <span class="logout-img">
                 <img class="img" src="{{ asset('stylecontainer/images/Shutdown.png') }}" alt="setting-img">
             </span>

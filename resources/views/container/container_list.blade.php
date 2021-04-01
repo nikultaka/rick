@@ -11,16 +11,16 @@
                 </div>
                 <thead>
                   <tr>
-                    <th>Ticker number</th>
-                    <th>Reference</th>
-                    <th>Date and time </th>
-                    <th>Pincode</th>
-                    <th>Lisence plate</th>
-                    <th>Container number</th>
-                    <th>Container type</th>
-                    <th>Vol/Leeg/papieren</th>
-                    <th>ADR</th>
-                    <th>Genset</th>
+                    <th width="10%">Ticker number</th>
+                    <th width="10%">Reference</th>
+                    <th width="10%">Date and time </th>
+                    <th width="10%">Pincode</th>
+                    <th width="10%">Lisence plate</th>
+                    <th width="10%">Container number</th>
+                    <th width="10%">Container type</th>
+                    <th width="10%">Vol/Leeg/papieren</th>
+                    <th width="10%">ADR</th>
+                    <th width="10%">Genset</th>
                   </tr>
                 </thead>
                 <tbody>
