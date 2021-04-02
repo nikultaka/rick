@@ -5,19 +5,15 @@
     <div class="login-wrapper">
         <div class="login-container">
             <div class="title">
-                <img class="title_img" src="{{ asset('stylecontainer/images/A15-containerservices-tekst 1.png') }}"
-                    alt="title">
+                <img class="title_img" src="{{ asset('stylecontainer/images/A15-containerservices-tekst 1.png') }}" alt="title">
             </div>
             <div class="rtrack-logo_img">
                 <img class="track-img" src="{{ asset('stylecontainer/images/rtrack_logo_img.png') }}" alt="title">
             </div>
             <div class="card">
-
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
-
-                        <div class="form-group row">
                             <div class="form-group">
                                 <div class="input-group username-group">
                                     <div class="control user-control">
@@ -55,7 +51,6 @@
                                     </span>
                                 </div>
                             </div>
-                        </div>
                         <div class="stratent-img">
                             <img src="{{ asset('stylecontainer/images/logo@1x 1.png') }}">
                         </div>

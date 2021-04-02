@@ -144,13 +144,14 @@ img{
     width:100%;
 }
 .dashbord-container .right-content {
-    flex: 1 0 auto;
+    /* flex: 1 0 auto; */
     position: relative;
     min-height: 951px;
 }
 .dashboard-title {
     padding: 31px 20px 31px 40px;
     border-bottom : 1px solid rgba(0, 0, 0, 0.2);
+    flex: 1 0 auto;
 }
 .dashboard-title .title{
     font-size: 40px;
@@ -163,13 +164,23 @@ img{
     bottom: 24px;
 }
 /*table start*/
+
+.table-responsive{
+    overflow-x: auto;
+ }
 table.GeneratedTable {
-  width: 96%;
+  width: 96% !important;
   background-color: #ffffff;
   border-collapse: collapse;
   margin:20px auto;
 }
-
+.GeneratedTable {
+    width: 96% !important;
+    flex: 1 0 auto;
+    background-color: #ffffff;
+    border-collapse: collapse;
+    margin:20px auto;
+  }
 table.GeneratedTable td, table.GeneratedTable th {
   border-bottom: 1px solid #ECECEC;
   padding: 5px ;
@@ -188,6 +199,7 @@ table.GeneratedTable th{
 table.GeneratedTable thead {
 background: #f5f5f5;
 }
+
 /*table end*/
 
 
@@ -251,6 +263,7 @@ background: #f5f5f5;
     .dashbord-header .admin-title {
         font-size: 20px;
     }
+
 }
 
 

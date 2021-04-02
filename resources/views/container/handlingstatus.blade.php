@@ -1,10 +1,11 @@
-      <div class="input-icons">
-        <div class="icon">
-          <i class="fa fa-search"></i>
-        </div>
-        <input type="text" id="searchbox" placeholder="Search keyword.." class="input-field" >
-      </div>
+<div class="table-responsive">
       <table class="GeneratedTable" id="service-table">
+        <div class="input-icons">
+          <div class="icon">
+            <i class="fa fa-search"></i>
+          </div>
+          <input type="text" id="searchbox" placeholder="Search keyword.." class="input-field" >
+        </div>
           {{ csrf_field() }}
             <thead>
                 <th>Ticker number</th>
@@ -19,6 +20,7 @@
                 <th>Genset</th>    
             </thead>
       </table>
+</div>
   <script type="text/javascript"> var url="{{url('/gethandlingstatus')}}";</script>
   <script type="text/javascript" src="{{ asset('container_js/handlingstatus_script.js')}}"></script>
   

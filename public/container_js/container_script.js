@@ -38,6 +38,7 @@ function loaddata(){
                     "targets": [8,9],
                     "orderable": false
                 }]
+
         });
 
         $("#searchbox").keyup(function() {

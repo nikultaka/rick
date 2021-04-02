@@ -16,24 +16,22 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('password.email') }}">
                         @csrf
-                        <div class="form-group row">
                             <div class="form-group">
                                 <div class="input-group username-group">
                                     <div class="control user-control">
                                         <input type="text" name="email"
                                             class="username-input input @error('email') is-invalid @enderror"
-                                            placeholder="Enter Your register email">
+                                            placeholder="Enter your register email">
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
-                                        <h2 style="margin-top :15px;">{{ __('Enter your register email we will send a link for reset your password....') }}</h2>
+                                        {{-- <h2 style="margin-top :15px;">{{ __('Enter your register email we will send a link for reset your password....') }}</h2> --}}
                                     </div>
                                 </div>
                                     <div class="control user-control">
                                     </div>
-                                </div>
                                 <div class="form-action">
                                     <span class="confirm">
                                         <button type="submit" class="confirm-btn" id="submit">

@@ -3,10 +3,11 @@
     border:none;
     outline: none;
 }
-.form-error {
-    border: 2px solid #ff0000;
-    color: #ff0000;
-  }
+.invalid-feedback{
+    display: flex;
+    justify-content: center;
+    color: red;
+}
 body{
     font-family: Roboto;
     font-weight: 400;

@@ -33,10 +33,9 @@
                 <div class="dashboard-title">
                     <h1 class="title">@yield('dashboardtitle') </h1>
                 </div>
-
-                {{-- dashboard all content is --}}
-                @yield('content')
-                {{-- content end --}}
+                        {{-- dashboard all content is --}}
+                        @yield('content')
+                        {{-- content end --}}
 
                 <div class="stratent-img">
                     <img src="{{ asset('stylecontainer/images/logo@1x 1.png') }}">

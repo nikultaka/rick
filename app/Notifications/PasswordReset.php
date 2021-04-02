@@ -41,6 +41,7 @@ class PasswordReset extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
+                    ->greeting('Hello!')
                     ->line('The introduction to the notification.')
                     ->action('Notification Action', url('/newpassword',$this->token))
                     ->line('If you did not request a password reset, no further action is required.');

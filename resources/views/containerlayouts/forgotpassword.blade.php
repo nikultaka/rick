@@ -16,7 +16,6 @@
                     @csrf
                     <input type="hidden" name="token" value="{{ $token }}">
 
-                    <div class="form-group row">
                         <div class="form-group">
                             <div class="input-group username-group">
                                 <div class="control user-control">
@@ -53,7 +52,6 @@
                                 </span>
                             </div>
                         </div>
-                    </div>
                     <div class="stratent-img">
                         <img src="{{ asset('stylecontainer/images/logo@1x 1.png') }}">
                     </div>

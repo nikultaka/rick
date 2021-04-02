@@ -1,7 +1,5 @@
-{{-- <div class="dashbord-wrapper">
-  <div class="dashbord-container">
-    <div class="right-content"> --}}
-            <table class="table GeneratedTable" id="service-table">
+<div class="table-responsive">
+          <table class="GeneratedTable" id="service-table" >
                 {{ csrf_field() }}
                 <div class="input-icons">
                     <div class="icon">
@@ -26,10 +24,7 @@
                 <tbody>
                 </tbody>
             </table>
-        {{-- </div>
-    </div>
-</div> --}}
-
+  </div>
 <script type="text/javascript">
     var url = "{{ url('/getListContainer') }}";
 </script>

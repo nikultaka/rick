@@ -1,6 +1,7 @@
 .input-icons i {
     position: absolute;
     margin-top: 20px;
+    margin-left: 20px;
 }
   
 .input-icons {
@@ -11,6 +12,7 @@
 .icon {
     padding: 10px;
     min-width: 50px;
+    margin-left: 10px;
 }
   
 .input-field {
@@ -19,4 +21,13 @@
     padding: 5px;
     text-align: center;
     outline: none;
+    margin-left: 20px;
 }
+
+table.dataTable thead th {
+    border-bottom: none !important;
+  }
+table.dataTable.no-footer {
+    border-bottom: none !important;
+    margin-bottom: 5px;
+  }
