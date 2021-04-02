@@ -26,8 +26,14 @@
 
 table.dataTable thead th {
     border-bottom: none !important;
-  }
+ }
 table.dataTable.no-footer {
     border-bottom: none !important;
     margin-bottom: 5px;
   }
+
+ .dataTables_length{
+    margin: 10px;
+    margin-left: 20px;
+  }
+ 

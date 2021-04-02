@@ -12,6 +12,9 @@ body{
 .dataTables_filter {
     display: none;
  }
+ .form-control{
+     width: 35% !important;
+ }
  
 img{
     width:100%;
@@ -21,7 +24,7 @@ img{
     width: 100%;
 }
 .dashbord-header {
-    background: #EE0202;
+    background: #f34e4e;
     width: 100%;
     max-width: 100%;
     display: flex;
@@ -148,10 +151,10 @@ img{
     position: relative;
     min-height: 951px;
 }
+
 .dashboard-title {
     padding: 31px 20px 31px 40px;
     border-bottom : 1px solid rgba(0, 0, 0, 0.2);
-    flex: 1 0 auto;
 }
 .dashboard-title .title{
     font-size: 40px;
@@ -174,12 +177,15 @@ table.GeneratedTable {
   border-collapse: collapse;
   margin:20px auto;
 }
-.GeneratedTable {
+.corporateinfofullwidth{
+    flex: 1 0 auto ;
+}
+ .corporateinfoTable {
     width: 96% !important;
-    flex: 1 0 auto;
     background-color: #ffffff;
     border-collapse: collapse;
     margin:20px auto;
+    margin-right: 0%;
   }
 table.GeneratedTable td, table.GeneratedTable th {
   border-bottom: 1px solid #ECECEC;

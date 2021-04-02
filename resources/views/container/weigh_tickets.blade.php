@@ -16,6 +16,9 @@
             display: block;
             margin-top: 5px;
             }
+            .dashbord-container .right-content{
+              flex: 1 0 auto;
+            }
     </style>
 
   <div class="table-responsive">

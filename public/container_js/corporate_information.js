@@ -49,7 +49,7 @@ $(document).ready(function () {
                         if (response.status == 1) {
                             Swal.fire({
                               icon: 'success',
-                              title: 'Data updated successfully',
+                              title: response.msg,
                             })
                         }
                     }

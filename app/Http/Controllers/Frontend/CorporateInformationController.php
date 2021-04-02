@@ -76,7 +76,7 @@ class CorporateInformationController extends Controller
                 $UpdateDetails->invoiceemail      = $corporateData['invoiceemail'];
                 $UpdateDetails->save();
                 $data['status'] = 1;
-                $data['msg'] = "Data Update Successfully !";
+                $data['msg'] = "Data Update Successfully!";
         }
         echo json_encode($data);
         exit();

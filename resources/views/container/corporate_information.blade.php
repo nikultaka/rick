@@ -8,8 +8,12 @@
         form .error {
                 color: #ff0000;
                 }
+        .dashbord-container .right-content{
+              flex: 1 0 auto;
+            }
     </style>
-    <div class="GeneratedTable">
+    <div class="corporateinfofullwidth">
+       <div class="corporateinfoTable" >
         <h3>Address</h3>
         <form  method="post" class="form-horizontal" id="corporateform" name="corporateform">
         {{ csrf_field() }}
@@ -65,4 +69,6 @@
             </div>
         </form>
     </div>
+  </div>
+
     <script type="text/javascript" src="{{ asset('container_js/corporate_information.js')}}"></script>
