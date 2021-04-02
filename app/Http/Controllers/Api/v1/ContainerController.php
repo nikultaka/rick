@@ -53,25 +53,33 @@ class ContainerController extends Controller
              $container = [];
              $user = Auth::user();
              $username = $user->name;
-             //if($request->is_save == '1') {
-                $container = new Container();
-                $container->user_id = $user->id;
-                $container->action_type = 'wegen';
-                $container->container_number = $request->container_number;
-                $container->container_type = $request->container_type;
-                $container->weight = $request->weight;
-                $container->reference = $request->reference;
-                $container->license_plate = $request->license_plate;
-                $container->transporter_id = $request->transporter_id;
-                $container->client_id = $request->client_id;
-                $prefix = '';
-                for($i = 0; $i < 6; $i++){
-                    $prefix .= random_int(0,1) ? chr(random_int(65, 90)) : random_int(0, 9);
-                }
-                $container->pin = $prefix;
-                $container->save();
-            //}
-            $data = array('container_number'=>$request->container_number,"container_type"=>$request->container_type,'weight'=>$request->container_number,'name'=>$username);
+             
+            $container = new Container();
+            $container->user_id = $user->id;
+            $container->action_type = $request->action_type;
+            $container->container_number = $request->container_number;
+            $container->container_type = $request->container_type;
+            $weight = '';
+            $reference = '';        
+            if(isset($request->weight)) {    
+                $weight = $request->weight;
+                $container->weight = $weight;    
+            }
+            if(isset($request->reference)) {
+                $reference = $request->reference;
+                $container->reference = $reference;
+            }            
+            $container->license_plate = $request->license_plate;
+            $container->transporter_id = $request->transporter_id;
+            $container->client_id = $request->client_id;
+            $prefix = '';
+            for($i = 0; $i < 6; $i++) {    
+                $prefix .= random_int(0,1) ? chr(random_int(65, 90)) : random_int(0, 9);
+            }
+            $container->pin = $prefix;
+            $container->save();
+
+            $data = array('container_number'=>$request->container_number,"container_type"=>$request->container_type,'weight'=>$weight,'name'=>$username);
             \Mail::send('container_mail', $data, function($message) {
                 $user = Auth::user();
                 $username = $user->name;
@@ -99,7 +107,7 @@ class ContainerController extends Controller
             'container_type'     => 'required',
             'weight'             => 'required',
             'is_save'            => 'required',   
-            'reference'          => 'required',
+            //'reference'          => 'required',
             'license_plate'      => 'required',   
             'transporter_id'     => 'required_without:client_id',
             'client_id'          => 'required_without:transporter_id',
@@ -115,7 +123,7 @@ class ContainerController extends Controller
             'stack'              => 'required',
             'locatie'            => 'required',
             'leeg'               => 'required',
-            'reference'          => 'required',
+            //'reference'          => 'required',
             'license_plate'      => 'required',   
             'transporter_id'     => 'required_without:client_id',
             'client_id'          => 'required_without:transporter_id',
