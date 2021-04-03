@@ -109,27 +109,19 @@ class ContainerlistController extends Controller
 		$weighTicketData = $request->all();
 		$data = array();
 		$weighTicketSql = DB::table('containers')
-					
-						->select('containers.*', 'container_type.container_type as container_type')
+						->where('stack','')					
+						->select('containers.*','container_type.container_type as container_type')
 					    ->leftjoin("container_type", "container_type.id", "=", "containers.container_type");
 
 		if(isset($weighTicketData['search']['value']) && $weighTicketData['search']['value'] != '')
 		{
 			$search = $weighTicketData['search']['value'];
-			$weighTicketSql->whereRaw("NOT containers.stack > ''");
-							// where_in('containers.stack',array(null,""));
-							// ->WhereNull('containers.stack');
-			$weighTicketSql->where('containers.reference','like','"%'.$search.'%"')
-						   ->oRwhere('containers.created_at','like','"%'.$search.'%"')
-						   ->oRwhere('container_type.container_type','like','"%'.$search.'%"')
-				           ->oRwhere('containers.container_number','like','"%'.$search.'%"')
-				           ->oRwhere('containers.weight','like','"%'.$search.'%"')
-				           ->oRwhere('containers.license_plate','like','"%'.$search.'%"');
-
-		   
-		}else{
-			$weighTicketSql->whereRaw("NOT containers.stack > ''");
-			// ->where_in('containers.stack',array(null,""));
+			$weighTicketSql->where('containers.reference','like','%'.$search.'%')
+						   ->orWhere('containers.created_at','like','%'.$search.'%')
+						   ->orWhere('container_type.container_type','like','%'.$search.'%')
+				           ->orWhere('containers.container_number','like','%'.$search.'%')
+				           ->orWhere('containers.weight','like','%'.$search.'%')
+				           ->orWhere('containers.license_plate','like','%'.$search.'%');
 		}	
 		$columns = array(
 			0 => 'containers.id',
@@ -161,7 +153,7 @@ class ContainerlistController extends Controller
 		if (isset($weighTicketData['start']) && $weighTicketData['start'] != '' && isset($weighTicketData['length']) && $weighTicketData['length'] != '') {
 			$weighTicketSql->limit($weighTicketData['length'])->offset($weighTicketData['start']);
 		}
-	
+		$weighTicketSql->orWhereNull('stack');
 		$listall=$weighTicketSql->get();
 
         foreach ($listall as $key => $row) {

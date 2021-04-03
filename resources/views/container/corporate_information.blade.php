@@ -8,9 +8,6 @@
         form .error {
                 color: #ff0000;
                 }
-        .dashbord-container .right-content{
-              flex: 1 0 auto;
-            }
     </style>
     <div class="corporateinfofullwidth">
        <div class="corporateinfoTable" >
