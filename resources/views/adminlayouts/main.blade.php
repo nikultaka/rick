@@ -46,7 +46,12 @@
     </div>
     <!-- jquery for toggle sidebar -->
     <script>
-        $(document).ready(function(){
+                $('.link').click(function(){
+                    $('.link').removeClass("active");
+                    $(this).addClass("active");
+                });
+
+          $(document).ready(function(){
              $(".toggle").click(function(){
              $("#sidebar").toggle("3000");
           });
@@ -61,6 +66,8 @@
               }
             });
           }   
+
+      
     </script>
 </body>
 

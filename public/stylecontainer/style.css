@@ -91,7 +91,7 @@ img{
     gap:19px;
 }
 
-.sidebar-links .link:hover{
+.sidebar-links  .link:hover {
     background: #E6E6E6;
     padding: 17px 10px 17px 15px;
     border-radius: 50px;
@@ -104,6 +104,14 @@ img{
     height: 18px;
     transition: 0.3s ease-in-out;
 }
+
+.active{
+    background: #E6E6E6;
+    padding: 17px 10px 17px 15px;
+    border-radius: 50px;
+    transition: 0.2s ease-in-out;
+  }
+
 .sidebar .setting-section {
     /*display: flex;
     justify-content: space-between;

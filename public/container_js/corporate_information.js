@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    
             $('#corporateform').validate({
             rules: {
                 address1: "required",

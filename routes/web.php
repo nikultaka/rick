@@ -20,7 +20,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
-
 // theme implementation
 Route::get('/', 'containertheme\MainthemepageController@login');
 Route::get('/login', 'containertheme\MainthemepageController@login')->name('login');
@@ -44,7 +43,5 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::get('/handlingstatus', 'Frontend\HandlingstatusController@index')->name('handlingstatus');
         Route::post('/gethandlingstatus', 'Frontend\HandlingstatusController@gethandlingstatus');
-
-
-    });
+});
 
