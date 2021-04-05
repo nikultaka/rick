@@ -30,12 +30,13 @@ img{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 17px 26px;
+    /*padding: 17px 26px;*/
+    padding: 7px 26px;      
 }
 .dashbord-header .toggle-left-section {
     display: flex;
     gap: 78px;
-    padding-left: 3%;
+    padding-left: 2%;
 }
 .dashbord-header .admin-title {
     font-size: 25px;
@@ -58,7 +59,8 @@ img{
     display: flex;
 }
 .sidebar {
-    max-width: 283px;
+    /*max-width: 283px;*/
+    max-width: 260px;
     width: 100%;
     flex: 0 0 283px;
     border-right:  1px solid rgba(0, 0, 0, 0.2);
@@ -83,7 +85,7 @@ img{
     display: flex;
     align-items: center;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 16px;
     text-decoration: none;
     color: rgba(0, 0, 0, 0.87);
     gap:19px;
@@ -118,7 +120,8 @@ img{
     position: fixed;
     bottom: 0;
     border-top: 1px solid rgba(0, 0, 0, 0.2);
-    max-width: 282px;
+    /*max-width: 282px;*/
+    max-width: 260px;
     align-items: center;
     width: 100%;
     background: #fff;
@@ -138,7 +141,7 @@ img{
 }
 .sidebar .setting-section .log-out {
     background: #E6E6E6;
-    padding: 7px 23px;
+    padding: 7px 9px;
     border-left: 1px solid rgba(0, 0, 0, 0.2);;
 }
 .sidebar .setting-section  .logout-img{
@@ -154,7 +157,8 @@ img{
 }
 
 .dashboard-title {
-    padding: 31px 20px 31px 40px;
+    /*padding: 31px 20px 31px 40px;*/
+    padding: 13px 20px 9px 40px;
     border-bottom : 1px solid rgba(0, 0, 0, 0.2);
 }
 .dashboard-title .title{
