@@ -36,4 +36,11 @@ table.dataTable.no-footer {
     margin: 10px;
     margin-left: 20px;
   }
- 
+
+  .pointer {
+      cursor: pointer;
+    }
+
+    #field, label{
+        float: none;
+    }

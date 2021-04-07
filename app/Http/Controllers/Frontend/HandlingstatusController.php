@@ -88,8 +88,20 @@ class HandlingstatusController extends Controller
 				$gensetstatus = 'disabled';
             }
 			$temp['genset'] = '<input type="checkbox"  '.$gensetstatus.'>';
+			$action = 
+					'<div class="dropdown">
+						<a class="dropdown-toggle" type="button" data-toggle="dropdown">
+								<i style="font-size:24px; color: black;" class="fa">&#xf141;</i>
+							</a>
+						<ul class="dropdown-menu pull-right pointer">
+							<li><a onclick="record_edit('. $row->id .')">  Adjust Handeling </a></li>
+							<li><a onclick="record_delete('. $row->id .')"> Delete Handeling </a></li>
+						</ul>
+					</div>';
+			$temp['action'] = $action;
 			$data[] = $temp;
 		}
+
         $json_data = array(
 			"draw" => intval($handlingstatus['draw']),
 			"recordsTotal" => intval($totalData),
@@ -99,4 +111,40 @@ class HandlingstatusController extends Controller
 		echo json_encode($json_data);
 		exit(0);
     }
+
+
+	public function deletehandalingdata(Request $request){
+		$del_id = $request->input('id');
+        $delete['status'] = 0;
+        $delete['msg']  = "Error data Not delete!";
+        $deletdataid = DB::table('containers')->where('id', $del_id)->delete();
+
+        if ($deletdataid) {
+            $delete['status'] = 1;
+            $delete['msg'] = "Your Data Delete Successfully -_-";
+        }
+        echo json_encode($delete);
+        exit;
+	}
+
+	public function edithandalingdata(Request $request)
+    {
+        $edit_id = $request->input('id');
+        $responsearray = array();
+        $responsearray['status'] = 0;
+
+        $editdata = DB::table('containers')->where('id', $edit_id)->first();
+
+        if ($editdata) {
+            $responsearray['status'] = 1;
+            $responsearray['user'] = $editdata;
+        }
+        echo json_encode($responsearray);
+        exit;
+    }
+
+
 }
+
+
+// <i style="font-size:24px" class="fa">&#xf141;</i>
