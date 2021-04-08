@@ -42,7 +42,7 @@
             <td>{{$WeighTicketsDetails->weight}}</td>
           </tr>
           <tr>
-            <td>Licence Plate</td>
+            <td>license plate</td>
             <td>{{$WeighTicketsDetails->license_plate}}</td>
           </tr>
           <tr>

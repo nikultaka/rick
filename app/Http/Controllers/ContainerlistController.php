@@ -166,8 +166,8 @@ class ContainerlistController extends Controller
 			$temp['container_type'] = $row->container_type;
 			$getPDFurl = url('/getPdf' , $row->id);
 			$temp['weighing_slip'] = '<div class="sub-menu"><a href="'.$getPDFurl.'" class="link">
-									 <i class="fa fa-file-text" style="font-size:17px; mar">
-									 <span class="badge badge-pill menu-title" style="font-size:10px;">Download</i></span></a>';
+									 <i class="fa fa-file-text" style="font-size:13px; mar">
+									 <span class="badge badge-pill menu-title" style="font-size:8px;">Download</i></span></a>';
 			$data[] = $temp;
 		}
         $json_data = array(

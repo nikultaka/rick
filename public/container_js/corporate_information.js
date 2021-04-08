@@ -1,45 +1,48 @@
 $(document).ready(function () {
-    
+        $("#saveeimg").hide();
+        $("#pencilimg").show();
+
+        // function savecorporatedata(){
             $('#corporateform').validate({
-            rules: {
-                address1: "required",
-                address2: "required",
-                state: "required",
-                city: "required",
-                vatnumber: "required",
-                
-                weighingslipsemail: {
-                    required: true,
-                    email: true,
+                rules: {
+                    address1: "required",
+                    address2: "required",
+                    state: "required",
+                    city: "required",
+                    vatnumber: "required",
+                    
+                    weighingslipsemail: {
+                        required: true,
+                        email: true,
+                    },
+                    storageemail: {
+                        required: true,
+                        email: true,
+                    },
+                    invoiceemail: {
+                        required: true,
+                        email: true,
+                    },
                 },
-                storageemail: {
-                    required: true,
-                    email: true,
+                messages: {
+                    address1:"This is a required field",
+                    address2:"This is a required field",
+                    state:"This is a required field",
+                    city:"This is a required field",
+                    vatnumber:"This is a required field",
+                    weighingslipsemail:{
+                        email: "Please enter a valid email address",
+                        required : "This is a required field",
+                    }, 
+                    storageemail:{
+                        email: "Please enter a valid email address",
+                        required : "This is a required field",
+                    }, 
+                    invoiceemail:{
+                        email: "Please enter a valid email address",
+                        required : "This is a required field",
+                    },
                 },
-                invoiceemail: {
-                    required: true,
-                    email: true,
-                },
-            },
-            messages: {
-                address1:"This is a required field",
-                address2:"This is a required field",
-                state:"This is a required field",
-                city:"This is a required field",
-                vatnumber:"This is a required field",
-                weighingslipsemail:{
-                    email: "Please enter a valid email address",
-                    required : "This is a required field",
-                }, 
-                storageemail:{
-                    email: "Please enter a valid email address",
-                    required : "This is a required field",
-                }, 
-                invoiceemail:{
-                    email: "Please enter a valid email address",
-                    required : "This is a required field",
-                },
-            },
             submitHandler: function(form){
                 $.ajax({
                     url: BASE_URL + '/insertCorporateInformation',
@@ -52,9 +55,26 @@ $(document).ready(function () {
                               icon: 'success',
                               title: response.msg,
                             })
+                            $("#saveeimg").hide();
+                            $("#pencilimg").show();
                         }
                     }
                 });
             }
         });
+    //    } 
     });
+    function removedisabledfield(){
+        alert("mkos");
+        $('#address1').removeAttr("disabled");
+        $('#address2').removeAttr("disabled");
+        $('#state').removeAttr("disabled");
+        $('#city').removeAttr("disabled");
+        $('#vatnumber').removeAttr("disabled");
+        $('#weighingslipsemail').removeAttr("disabled");
+        $('#storageemail').removeAttr("disabled");
+        $('#invoiceemail').removeAttr("disabled");
+        $("#saveeimg").show();
+        $("#pencilimg").hide();
+
+    }

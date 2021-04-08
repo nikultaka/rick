@@ -48,3 +48,18 @@ table.dataTable.no-footer {
 .sub-menu{
     margin-left: 15px;
 }
+
+.edit_save_info{
+    width:2%;
+    float:right;
+    position: absolute !important;
+    float: right;
+    right: 0;
+}
+
+.save_infor_button{
+    background: transparent;
+    border: none;
+    background:none;
+    outline: none !important;
+}

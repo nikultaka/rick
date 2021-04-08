@@ -9,7 +9,7 @@ $(document).ready(function(){
             lisenceplate : "Lisence Plate is Required",
             containernumber : "Container number is Required",
         },
-        submitHandler: function() {
+        submitHandler:function() {
             $.ajax({
                 url: BASE_URL + '/updatehandalingdata',
                 type: 'POST',

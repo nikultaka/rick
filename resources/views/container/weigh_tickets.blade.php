@@ -32,7 +32,7 @@
             <th>Reference</th>
             <th>Date and time </th>    
             <th>Weight</th>    
-            <th>Licence plate</th>    
+            <th>license plate</th>    
             <th>Container number</th>    
             <th>Container type</th>    
             <th>Weighing Slip</th>    

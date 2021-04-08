@@ -91,9 +91,9 @@
             <thead>
                 <th>Ticker number</th>
                 <th>Kind of action</th>
-                <th>Date and time </th>
+                <th width="15%">Date and time </th>
                 <th>Pincode</th>    
-                <th>License plate</th>    
+                <th>license plate</th>    
                 <th>Container number</th>    
                 <th>Container type</th>    
                 <th>Number of handling</th>    
