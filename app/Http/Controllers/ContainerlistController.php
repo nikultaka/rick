@@ -166,8 +166,8 @@ class ContainerlistController extends Controller
 			$temp['container_type'] = $row->container_type;
 			$getPDFurl = url('/getPdf' , $row->id);
 			$temp['weighing_slip'] = '<div class="sub-menu"><a href="'.$getPDFurl.'" class="link">
-									 <i class="fa fa-file-text" style="font-size:20px;">
-									 <span class="badge badge-pill menu-title">Download</span></i></a>';
+									 <i class="fa fa-file-text" style="font-size:17px; mar">
+									 <span class="badge badge-pill menu-title" style="font-size:10px;">Download</i></span></a>';
 			$data[] = $temp;
 		}
         $json_data = array(
@@ -186,6 +186,7 @@ class ContainerlistController extends Controller
 						->leftjoin("container_type", "container_type.id","=","containers.container_type")
 						->where('containers.id',$id)
 						->first();
+						
 		$pdf = PDF::loadView('container/DownloadPDF',['WeighTicketsDetails' => $WeighTicketsDetails]);
 		return $pdf->download('WeightTicketsDetails.pdf');	
 		return view('DownloadPDF');

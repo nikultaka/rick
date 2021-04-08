@@ -1,8 +1,37 @@
 $(document).ready(function(){
     loaddata();
-    
-  
+    $("form").validate({
+        rules: {
+            lisenceplate : "required",
+            containernumber : "required",
+        },
+        messages: {
+            lisenceplate : "Lisence Plate is Required",
+            containernumber : "Container number is Required",
+        },
+        submitHandler: function() {
+            $.ajax({
+                url: BASE_URL + '/updatehandalingdata',
+                type: 'POST',
+                data: $('#formdata').serialize(),
+                success: function (responce) {
+                    var data = JSON.parse(responce);
+                    console.log(data);
+                    if (data.status == 1) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: data.msg,
+                                showConfirmButton: false,
+                            })
+                        $('#handlingModal').modal('hide');
+                        loaddata();
+                    }
+                }
+            });
+        }
+    });
 });
+
 function loaddata(){
    var dataTable = $('#service-table').dataTable({
         "dom": '<"top"i>rt<"bottom"flp><"clear">',
@@ -93,20 +122,31 @@ function record_edit(id){
             $('#handlingModal').modal('show');
             var data = JSON.parse(responce);
             var result = data.user;
-            console.log(result);  
             if (data.status == 1) {
+                $('#hid').val(result.id);
                 $('#pincode').val(result.pin);
                 $('#lisenceplate').val(result.license_plate);
                 $('#containernumber').val(result.container_number);
                 $('#containertype').val(result.container_type);
-                // $('#pincode').val(result.pin);
-                $('#' + result.adr).attr("checked", true);
-                $('#' + result.genset).attr("checked", true);
-
+                $('#handling').val(result.handling_status);
+                var adr = result.adr;
+                if(adr == 1){
+                    $("input[name='adr']").prop('checked', true);
+                }else{
+                    $("input[name='adr']").prop('checked', false);
+                }
+                var genset = result.genset;
+                if(genset == 1){
+                    $("input[name='genset']").prop('checked', true);
+                }else{
+                    $("input[name='genset']").prop('checked', false);
+                }
             }
             loaddata();
         }
     });
 }
+
+
 
 

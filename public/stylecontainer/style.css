@@ -93,7 +93,7 @@ img{
 
 .sidebar-links  .link:hover {
     background: #E6E6E6;
-    padding: 17px 10px 17px 15px;
+    padding: 10px 10px 17px 15px;
     border-radius: 50px;
     transition: 0.2s ease-in-out;
 }
@@ -107,7 +107,7 @@ img{
 
 .active{
     background: #E6E6E6;
-    padding: 17px 10px 17px 15px;
+    padding: 10px 10px 17px 15px;
     border-radius: 50px;
     transition: 0.2s ease-in-out;
   }

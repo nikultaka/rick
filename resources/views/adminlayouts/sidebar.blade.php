@@ -29,7 +29,7 @@
     <div class="setting-section">
         <a href="#" class="setting"><img class="img" src="{{ asset('stylecontainer/images/setting.png') }}"
                 alt="setting-img"></a>
-        <span class="setting-text">Settings</span>
+        <span class="setting-text">Log out</span>
         <a class="log-out" href="javascript:void(0);" 
                 onclick='logout();'>
             <span class="logout-img">

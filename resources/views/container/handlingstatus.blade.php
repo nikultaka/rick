@@ -29,8 +29,8 @@
                 <input type="text" class="form-control" name="pincode" id="pincode" placeholder="Pincode" require="" readonly>
             </div>
             <div class="form-grup">
-              <label for="lisenceplate">Lisence Plate:</label><br>
-              <input type="text" class="form-control" name="lisenceplate" id="lisenceplate" placeholder="Lisence Plate" require="">
+              <label for="lisenceplate">License plate:</label><br>
+              <input type="text" class="form-control" name="lisenceplate" id="lisenceplate" placeholder="License plate" require="">
             </div>
             <div class="form-grup">
               <label for="containernumber">Container number:</label><br>
@@ -38,7 +38,11 @@
             </div>
             <div class="form-grup">
               <label for="containertype">Container type:</label><br>
-              <input type="text" class="form-control" name="containertype" id="containertype" placeholder="Container Type" require="">
+              <select name="containertype" id="containertype" class="custom-select">
+                @foreach($containertype as $containertype)
+                <option class="custom-select" value='{{$containertype->id}}'>{{$containertype->container_type}}</option>
+                @endforeach
+            </select>
           </div>
         
           <div class="form-group">
@@ -53,26 +57,28 @@
           
           <div class="form-grup">
             <label for="adr" style="margin: 3px;">ADR:</label>
-            <input type="checkbox"  name="adr" id="adr" placeholder="adr">
+            <input type="checkbox"  name="adr" id="adr"  placeholder="adr">
           </div>
           <div class="form-grup ">
             <label for="genset" style="margin: 3px;">Genset:</label>
-            <input type="checkbox"  name="genset" id="genset" placeholder="genset">
+            <input type="checkbox"  name="genset"  id="genset" placeholder="genset">
           </div>
-      </form>
+      
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="submit">Update</button>
+        <button type="submit" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" id="submit">Update</button>
+        </form>
       </div>
     
     </div>
   </div>
 </div>
+<!-- End modal -->
 
 
-
+<!-- data table display all data -->
 <div class="table-responsive">
       <table class="GeneratedTable" id="service-table">
         <div class="input-icons">
@@ -85,9 +91,9 @@
             <thead>
                 <th>Ticker number</th>
                 <th>Kind of action</th>
-                <th>Date and time </th>    
+                <th>Date and time </th>
                 <th>Pincode</th>    
-                <th>Lisence plate</th>    
+                <th>License plate</th>    
                 <th>Container number</th>    
                 <th>Container type</th>    
                 <th>Number of handling</th>    

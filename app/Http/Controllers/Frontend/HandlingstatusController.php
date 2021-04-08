@@ -8,7 +8,8 @@ use DB;
 class HandlingstatusController extends Controller
 {
     public function index() {
-    	return view('container/handling_status');
+		$data['containertype'] = DB::table('container_type')->get();
+    	return view('container/handling_status')->with($data);
     }
 
     public function gethandlingstatus(Request $request){
@@ -91,7 +92,7 @@ class HandlingstatusController extends Controller
 			$action = 
 					'<div class="dropdown">
 						<a class="dropdown-toggle" type="button" data-toggle="dropdown">
-								<i style="font-size:24px; color: black;" class="fa">&#xf141;</i>
+								<i style="font-size:24px; color: #111;" class="fa">&#xf141;</i>
 							</a>
 						<ul class="dropdown-menu pull-right pointer">
 							<li><a onclick="record_edit('. $row->id .')">  Adjust Handeling </a></li>
@@ -127,22 +128,48 @@ class HandlingstatusController extends Controller
         exit;
 	}
 
-	public function edithandalingdata(Request $request)
-    {
+	public function edithandalingdata(Request $request){
         $edit_id = $request->input('id');
         $responsearray = array();
         $responsearray['status'] = 0;
 
-        $editdata = DB::table('containers')->where('id', $edit_id)->first();
+        // $editdata = DB::table('containers')->where('id', $edit_id)->first();
+		$editdata = DB::table('containers')
+					->select('containers.*', 'container_type.container_type as container_type_name')
+        			->leftjoin("container_type", "container_type.id", "=", "containers.container_type")
+        			->where('containers.id', $edit_id)->get();
 
         if ($editdata) {
             $responsearray['status'] = 1;
-            $responsearray['user'] = $editdata;
+            $responsearray['user'] = $editdata[0];
         }
         echo json_encode($responsearray);
         exit;
     }
 
+	public function updatehandalingdata(Request $request){
+		$update_id = $request->input('hid');
+        $data = $request->input();
+        $result['status'] = 0;
+        $result['msg'] = "Handaling update Unsuccessfull";
+
+        $updatedata['pin'] = $data['pincode'];
+        $updatedata['license_plate'] = $data['lisenceplate'];
+        $updatedata['container_number'] = $data['containernumber'];
+        $updatedata['container_type'] = $data['containertype'];
+        $updatedata['handling_status'] = $data['handling'];
+        $updatedata['adr'] = isset($data['adr']) ? 1 : 0 ;
+        $updatedata['genset'] = isset($data['genset']) ? 1 : 0;
+       
+		if($update_id != ''){
+			$update_sql = DB::table('containers')->where('id',$update_id)->update($updatedata);
+			$result['status'] = 1;
+				$result['msg'] = "Handaling update Successfull";
+			}
+
+			echo json_encode($result);
+			exit();
+	}
 
 }
 

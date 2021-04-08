@@ -45,6 +45,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/gethandlingstatus', 'Frontend\HandlingstatusController@gethandlingstatus');
         Route::post('/deletehandalingdata', 'Frontend\HandlingstatusController@deletehandalingdata');
         Route::post('/edithandalingdata', 'Frontend\HandlingstatusController@edithandalingdata');
+        Route::post('/updatehandalingdata', 'Frontend\HandlingstatusController@updatehandalingdata');
+
 
 
 });

@@ -42,5 +42,9 @@ table.dataTable.no-footer {
     }
 
     #field, label{
-        float: none;
+        float: none !important;
     }
+
+.sub-menu{
+    margin-left: 15px;
+}
