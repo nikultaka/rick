@@ -120,8 +120,8 @@ class ContainerController extends Controller
             'container_number'   => 'required|unique:containers',
             'container_type'     => 'required',
             'weight'             => 'required',
-            'stack'              => 'required',
-            'locatie'            => 'required',
+            //'stack'              => 'required',
+            //'locatie'            => 'required',
             'leeg'               => 'required',
             //'reference'          => 'required',
             'license_plate'      => 'required',   
@@ -178,7 +178,7 @@ class ContainerController extends Controller
 
              $container = [];
              $user = Auth::user();
-             $username = $user->name;    
+             $username = $user->name;       
 
             $container = new Container();
             $container->user_id = $user->id;
@@ -186,8 +186,20 @@ class ContainerController extends Controller
             $container->container_number = $request->container_number;
             $container->container_type = $request->container_type;
             $container->weight = $request->weight;
-            $container->stack = $request->stack;
-            $container->locatie = $request->locatie;
+
+            $stack = '';
+            if(isset($request->stack)) {
+                $stack = $request->stack;
+                $container->stack = $stack;    
+            } 
+            
+
+            $locatie = '';
+            if(isset($request->locatie)) {
+                $locatie = $request->locatie;
+                $container->locatie = $locatie;    
+            }
+            
             $container->leeg = $request->leeg;
             $container->reference = $request->reference;
             $container->license_plate = $request->license_plate;
@@ -220,8 +232,8 @@ class ContainerController extends Controller
                             "container_type"=>$request->container_type,
                             "weight"=>$request->weight,
                             "name"=>$username,
-                            "stack"=>$request->stack,
-                            'locatie'=>$request->locatie,
+                            "stack"=>$stack,
+                            'locatie'=>$locatie,   
                             "leeg"=>$request->leeg);
          
             \Mail::send('container_detail', $data, function($message) {
