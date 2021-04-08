@@ -57,6 +57,7 @@ $(document).ready(function () {
                             })
                             $("#saveeimg").hide();
                             $("#pencilimg").show();
+                            $('form *').prop('disabled', true);
                         }
                     }
                 });
@@ -65,16 +66,7 @@ $(document).ready(function () {
     //    } 
     });
     function removedisabledfield(){
-        alert("mkos");
-        $('#address1').removeAttr("disabled");
-        $('#address2').removeAttr("disabled");
-        $('#state').removeAttr("disabled");
-        $('#city').removeAttr("disabled");
-        $('#vatnumber').removeAttr("disabled");
-        $('#weighingslipsemail').removeAttr("disabled");
-        $('#storageemail').removeAttr("disabled");
-        $('#invoiceemail').removeAttr("disabled");
+        $('form *').removeAttr("disabled");
         $("#saveeimg").show();
         $("#pencilimg").hide();
-
     }
