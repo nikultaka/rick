@@ -95,8 +95,8 @@ class HandlingstatusController extends Controller
 								<i style="font-size:24px; color: #111;" class="fa">&#xf141;</i>
 							</a>
 						<ul class="dropdown-menu pull-right pointer">
-							<li><a onclick="record_edit('. $row->id .')">  Adjust Handeling </a></li>
-							<li><a onclick="record_delete('. $row->id .')"> Delete Handeling </a></li>
+							<li><a onclick="record_edit('. $row->id .')">  Adjust Handling </a></li>
+							<li><a onclick="record_delete('. $row->id .')"> Delete Handling </a></li>
 						</ul>
 					</div>';
 			$temp['action'] = $action;
