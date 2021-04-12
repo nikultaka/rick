@@ -41,11 +41,7 @@
                       <input type="text" class="form-control" id="vatnumber" placeholder="vat number" name="vatnumber" value="{{isset($data->vatnumber) ? $data->vatnumber : ''}}" disabled>
                 </div>
             </div>
-            {{-- <div class="form-group">
-                <div>
-                      <input type="text" class="form-control" id="clientid" placeholder="clientid" name="clientid" value="{{isset($data->clientid) ? $data->clientid : ''}}" disabled>
-                </div>
-            </div> --}}
+           
         <hr class="solid">
         <div class="row">
         <h3 class="col-3" style="margin-top: 10px;">Email Settings</h3>

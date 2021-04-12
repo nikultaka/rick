@@ -1,6 +1,6 @@
 $(document).ready(function(){
     loaddata();
-    $("form").validate({
+    $("#formdata").validate({
         rules: {
             lisenceplate : "required",
             containernumber : "required",
@@ -22,6 +22,8 @@ $(document).ready(function(){
                                 icon: 'success',
                                 title: data.msg,
                                 showConfirmButton: false,
+                                timer: 1500
+
                             })
                         $('#handlingModal').modal('hide');
                         loaddata();

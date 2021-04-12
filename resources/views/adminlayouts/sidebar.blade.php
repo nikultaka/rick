@@ -1,6 +1,6 @@
 <div class="sidebar" id="sidebar">
     <ul class="sidebar-links">
-        <li class="tab-list"><a href="#" class="link"><span class="img-icon">
+        <li class="tab-list"><a href="{{ route('dashboard-theme') }}" class="link"><span class="img-icon">
             <img class="img" src="{{ asset('stylecontainer/images/home.png') }}" alt="icon">
             </span>Dashboard</a>
         </li>
@@ -12,7 +12,7 @@
             <img class="img" src="{{ asset('stylecontainer/images/Scales.png') }}" alt="icon">
             </span>Weigh tickets</a>
         </li>
-        <li class="tab-list"><a href="#" class="link"><span class="img-icon">
+        <li class="tab-list"><a href="{{ route('dashboard-theme') }}" class="link"><span class="img-icon">
             <img class="img" src="{{ asset('stylecontainer/images/Purchase_Order.png') }}" alt="icon">
             </span>Invoices</a>
         </li>

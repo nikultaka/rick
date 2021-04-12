@@ -29,7 +29,7 @@ Route::get('/register', 'containertheme\MainthemepageController@register')->name
 
 // after login
 Route::group(['middleware' => ['auth']], function () { 
-        Route::get('/dashboard-theme', 'containertheme\DashboardthemeController@index');
+        Route::get('/dashboard-theme','containertheme\DashboardthemeController@index')->name('dashboard-theme');
        
         Route::get('/corporate-information', 'Frontend\CorporateInformationController@index')->name('corporate-information');
         Route::post('/insertCorporateInformation', 'Frontend\CorporateInformationController@insertcorporateinformation');

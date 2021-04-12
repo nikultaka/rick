@@ -54,6 +54,7 @@ $(document).ready(function () {
                             Swal.fire({
                               icon: 'success',
                               title: response.msg,
+                              timer: 1500
                             })
                             $("#saveeimg").hide();
                             $("#pencilimg").show();
