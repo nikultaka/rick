@@ -1,4 +1,7 @@
 $(document).ready(function(){
+    $('#handlingModal').on('hidden.bs.modal', function(){
+        $('#formdata').trigger("reset");
+    });
     loaddata();
     $("#formdata").validate({
         rules: {

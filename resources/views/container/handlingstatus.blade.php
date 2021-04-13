@@ -3,7 +3,9 @@
   .dropdown-toggle::after {
     display:none;
   }
-
+  form .error {
+    color: #ff0000;
+    }
 </style>
 
 <!-- Button trigger modal -->
